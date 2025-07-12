@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+pyspark-env
+*/artifacts
+*/spark-warehouse
