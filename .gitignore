@@ -11,3 +11,4 @@ wheels/
 pyspark-env
 */artifacts
 */spark-warehouse
+.python-version
