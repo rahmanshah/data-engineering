@@ -26,5 +26,5 @@ orchestration_with_airflow/dags/.airflowignore
 orchestration_with_airflow/dags/exampledag.py
 orchestration_with_airflow/*.txt
 orchestration_with_airflow/tests*
-orchestration_with_airflow/.astro*
+orchestration_with_airflow/logs*
 orchestration_with_airflow/Dockerfile
