@@ -7,9 +7,24 @@ wheels/
 *.egg-info
 
 # Virtual environments
+venv
 .venv
 pyspark-env
 */artifacts
 */spark-warehouse
 .python-version
 data_processing_with_spark/data/*.csv.gz
+airflow_settings.yaml
+astro
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+airflow.db
+orchestration_with_airflow/.dockerignore
+orchestration_with_airflow/.env
+orchestration_with_airflow/dags/.airflowignore
+orchestration_with_airflow/dags/exampledag.py
+orchestration_with_airflow/*.txt
+orchestration_with_airflow/tests*
+orchestration_with_airflow/.astro*
+orchestration_with_airflow/Dockerfile
