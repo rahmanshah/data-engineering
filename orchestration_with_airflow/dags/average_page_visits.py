@@ -15,4 +15,12 @@ from airflow.operators.python import get_current_context
 )
 
 def average_page_visits():
-    pass
+    @task
+    def produce_page_visits_data():
+        pass
+
+    @task
+    def process_page_visits_data():
+        pass
+
+demo_dag = average_page_visits()
