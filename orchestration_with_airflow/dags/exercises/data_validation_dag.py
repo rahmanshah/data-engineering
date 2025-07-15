@@ -116,6 +116,14 @@ def data_quality_pipeline():
                     "booking_id": index,
                     "anomalies": row_anomalies,
                 })
+        
+        anomalies_file = get_anomalies_path(context)
+        directory = os.path.dirname(anomalies_file)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        with open(anomalies_file, "w") as f:
+            json.dump(anomalies, f, indent=4)
 
             
 
