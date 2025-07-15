@@ -1,4 +1,4 @@
-## Data Englineering with PySpar, Airflow
+## Data Englineering with PySpark, Airflow
 
 ### Data processing with PySpark
 
