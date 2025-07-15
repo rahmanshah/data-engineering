@@ -67,6 +67,16 @@ def data_quality_pipeline():
                 "status": generate_status()
             }
             bookings.append(booking)
+        
+                directory = os.path.dirname(booking_path)
+                
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        with open(booking_path, "w") as f:
+            json.dump(bookings, f, indent=4)
+
+        print(f"Written to file: {booking_path}")
 
     
     @task
