@@ -35,4 +35,4 @@ def data_quality_pipeline():
     
     generate_bookings() >> quality_check()
 
-    dag_instance = data_quality_pipeline()
+dag_instance = data_quality_pipeline()
