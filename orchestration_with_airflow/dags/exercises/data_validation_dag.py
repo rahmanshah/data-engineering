@@ -68,7 +68,7 @@ def data_quality_pipeline():
             }
             bookings.append(booking)
         
-                directory = os.path.dirname(booking_path)
+        directory = os.path.dirname(booking_path)
 
         if not os.path.exists(directory):
             os.makedirs(directory)
