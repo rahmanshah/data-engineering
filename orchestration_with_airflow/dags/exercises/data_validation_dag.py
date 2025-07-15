@@ -125,6 +125,9 @@ def data_quality_pipeline():
         with open(anomalies_file, "w") as f:
             json.dump(anomalies, f, indent=4)
 
+        print(f"Completed validation for {booking_path}. Anomalies found: {len(anomalies)}")
+        print(f"Result written to {anomalies_file}")
+
             
 
     
