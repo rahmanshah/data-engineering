@@ -55,6 +55,19 @@ def data_quality_pipeline():
         context = get_current_context()
         booking_path = get_bookings_path(context)
 
+        num_bookings = random.randint(5, 15)
+        bookings = []
+
+        for i in range(num_bookings):
+            booking = {
+                "booking_id": generate_booking_id(i),
+                "listing_id": generate_listing_id(),
+                "user_id": generate_user_id(),
+                "booking_time": generate_booking_time(context["execution_date"]),
+                "status": generate_status()
+            }
+            bookings.append(booking)
+
     
     @task
     def quality_check():
