@@ -69,7 +69,7 @@ def data_quality_pipeline():
             bookings.append(booking)
         
                 directory = os.path.dirname(booking_path)
-                
+
         if not os.path.exists(directory):
             os.makedirs(directory)
 
@@ -78,6 +78,11 @@ def data_quality_pipeline():
 
         print(f"Written to file: {booking_path}")
 
+    def get_anomalies_path(context):
+        execution_date = context["execution_date"]
+        file_date = execution_date.strftime("%Y-%m-%d_%H-%M")
+        
+        return f"/tmp/data/anomalies/{file_date}/anomalies.json"
     
     @task
     def quality_check():
