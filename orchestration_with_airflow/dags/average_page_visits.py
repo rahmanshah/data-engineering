@@ -42,6 +42,12 @@ def average_page_visits():
 
     @task
     def process_page_visits_data():
-        pass
+        file_path = get_data_path()
+
+        with open(file_path, "r") as f:
+            page_visits = json.load(f)
+        
+        average_price = sum(page_visit["page_visits"] for page_visit in page_visits) / len(page_visits)
+        print(f"Average number of page visits {average_price}")
 
 demo_dag = average_page_visits()
