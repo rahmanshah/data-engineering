@@ -111,6 +111,12 @@ def data_quality_pipeline():
             if row["status"] and row["status"] not in valid_statuses:
                 row_anomalies.append(f"Invalid status: {row['status']}")
 
+            if row_anomalies:
+                anomalies.append({
+                    "booking_id": index,
+                    "anomalies": row_anomalies,
+                })
+
             
 
     
