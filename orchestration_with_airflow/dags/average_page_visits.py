@@ -50,4 +50,7 @@ def average_page_visits():
         average_price = sum(page_visit["page_visits"] for page_visit in page_visits) / len(page_visits)
         print(f"Average number of page visits {average_price}")
 
+    ## Adding Dependency
+    produce_page_visits_data() >> process_page_visits_data()
+
 demo_dag = average_page_visits()
