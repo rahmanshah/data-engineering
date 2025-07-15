@@ -31,6 +31,15 @@ def average_page_visits():
             ]
         file_path = get_data_path()
 
+        directory = os.path.dirname(file_path)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        with open(file_path, "w") as f:
+            json.dump(page_visits, f)
+
+        print(f"Written to file: {file_path}")
+
     @task
     def process_page_visits_data():
         pass
