@@ -95,6 +95,21 @@ def data_quality_pipeline():
         with open(booking_path, "r") as f:
             bookings = json.load(f)
 
+        for index, row in enumerate(bookings):
+            row_anomalies = []
+            if not row["booking_id"]:
+                row_anomalies.append("Missing booking_id")
+            if not row["listing_id"]:
+                row_anomalies.append("Missing listing_id")
+            if not row["user_id"]:
+                row_anomalies.append("Missing user_id")
+            if not row["booking_time"]:
+                row_anomalies.append("Missing booking_time")
+            if not row["status"]:
+                row_anomalies.append("Missing status")
+
+            
+
     
     generate_bookings() >> quality_check()
 
