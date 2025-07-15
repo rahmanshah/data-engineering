@@ -108,6 +108,9 @@ def data_quality_pipeline():
             if not row["status"]:
                 row_anomalies.append("Missing status")
 
+            if row["status"] and row["status"] not in valid_statuses:
+                row_anomalies.append(f"Invalid status: {row['status']}")
+
             
 
     
