@@ -12,3 +12,19 @@ import random
     catchup=False,
     description="Data Quality Check DAG",
 )
+
+def data_quality_pipeline():
+
+    @task
+    def generate_bookings():
+        pass 
+
+    
+    @task
+    def quality_check():
+        pass 
+
+    
+    generate_bookings() >> quality_check()
+
+    dag_instance = data_quality_pipeline()
