@@ -87,7 +87,10 @@ def data_quality_pipeline():
     @task
     def quality_check():
         context = get_current_context()
-        booking_path = get_bookings_path(context) 
+        booking_path = get_bookings_path(context)
+
+        anomalies = []
+        valid_statuses = {"confirmed", "pending", "cancelled"}
 
     
     generate_bookings() >> quality_check()
