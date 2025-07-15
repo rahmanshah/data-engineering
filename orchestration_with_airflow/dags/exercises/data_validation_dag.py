@@ -92,6 +92,9 @@ def data_quality_pipeline():
         anomalies = []
         valid_statuses = {"confirmed", "pending", "cancelled"}
 
+        with open(booking_path, "r") as f:
+            bookings = json.load(f)
+
     
     generate_bookings() >> quality_check()
 
