@@ -15,14 +15,22 @@ import random
 
 def data_quality_pipeline():
 
+    def get_bookings_path(context):
+        execution_date = context["execution_date"]
+        file_date = execution_date.strftime("%Y-%m-%d_%H-%M")
+
+        return f"/tmp/data/bookings/{file_date}/bookings.json"
+
     @task
     def generate_bookings():
-        pass 
+        context = get_current_context()
+        booking_path = get_bookings_path(context)
 
     
     @task
     def quality_check():
-        pass 
+        context = get_current_context()
+        booking_path = get_bookings_path(context) 
 
     
     generate_bookings() >> quality_check()
