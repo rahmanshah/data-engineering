@@ -15,11 +15,40 @@ import random
 
 def data_quality_pipeline():
 
+    CORRECT_PROB = 0.7
+
     def get_bookings_path(context):
         execution_date = context["execution_date"]
         file_date = execution_date.strftime("%Y-%m-%d_%H-%M")
 
         return f"/tmp/data/bookings/{file_date}/bookings.json"
+    
+    def generate_booking_id(i):
+        if random.random() < CORRECT_PROB:
+            return i + 1
+
+        return ""
+
+    def generate_listing_id():
+        if random.random() < CORRECT_PROB:
+            return random.choice([1, 2, 3, 4, 5])
+
+        return ""
+
+    def generate_user_id(correct_prob=0.7):
+        return random.randint(1000, 5000) if random.random() < correct_prob else ""
+
+    def generate_booking_time(execution_date):
+        if random.random() < CORRECT_PROB:
+            return execution_date.strftime('%Y-%m-%d %H:%M:%S')
+
+        return ""
+
+    def generate_status():
+        if random.random() < CORRECT_PROB:
+            return random.choice(["confirmed", "pending", "cancelled"])
+
+        return random.choice(["unknown", "", "error"])
 
     @task
     def generate_bookings():
