@@ -39,3 +39,17 @@ def bookings_spark_pipeline():
         os.makedirs(directory)
 
     fieldnames = ["booking_id", "listing_id", "user_id", "booking_time", "status"]
+
+    with open(file_path, "w", newline="") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for booking in bookings:
+            writer.writerow({
+                "booking_id": booking["booking_id"],
+                "listing_id": booking["listing_id"],
+                "user_id": booking["user_id"],
+                "booking_time": booking["booking_time"],
+                "status": booking["status"]
+            })
+
+    print(f"Generated bookings data written to {file_path}")
