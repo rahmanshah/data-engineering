@@ -5,6 +5,7 @@ from datetime import datetime
 import os
 import csv
 import random
+from airflow.operators.bash import BashOperator
 
 @dag(
     "bookings_spark_pipeline",
@@ -30,7 +31,7 @@ def bookings_spark_pipeline():
         for i in range(num_bookings):
             booking = {
                 "booking_id": random.randint(1000, 5000),
-                "listing_id": random.choice([13913, 17402, 24328, 33332, 116268, 117203, 127652, 127860]),
+                "listing_id": random.choice([264776, 264782, 266037]),
                 "user_id": random.randint(1000, 5000),
                 "booking_time": execution_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "status": random.choice(["confirmed", "cancelled", "pending"])
@@ -57,9 +58,16 @@ def bookings_spark_pipeline():
 
         print(f"Generated bookings data written to {file_path}")
 
+    ## creating output directory
+    create_output_dir = BashOperator(
+    task_id="create_output_directory",
+    bash_command="mkdir -p /tmp/data/bookings_per_listing/{{ execution_date.strftime('%Y-%m-%d_%H%M') }}"
+    )
+
+
     spark_job = SparkSubmitOperator(
         task_id="process_listings_and_bookings",
-        application="bookings_per_listing_spark.py",
+        application="dags/bookings_per_listing_spark.py",
         name="listings_bookings_join",
         application_args=[
             "--listings_file", "/tmp/data/listings/{{ execution_date.strftime('%Y-%m') }}/listings.csv.gz",
@@ -70,7 +78,7 @@ def bookings_spark_pipeline():
     )
 
     bookings_file = generate_bookings()
-    bookings_file >> spark_job
+    bookings_file >> create_output_dir >> spark_job
 
 
 dag_instance = bookings_spark_pipeline()
