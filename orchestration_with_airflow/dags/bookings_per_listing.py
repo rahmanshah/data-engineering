@@ -68,3 +68,5 @@ def bookings_spark_pipeline():
         ],
         conn_id='spark_booking',
     )
+
+    bookings_file = generate_bookings()
