@@ -20,3 +20,16 @@ def bookings_spark_pipeline():
 
     file_date = execution_date.strftime("%Y-%m-%d_%H%M")
     file_path = f"/tmp/data/bookings/{file_date}/bookings.csv"
+
+    num_bookings = random.randint(30, 50)
+    bookings = []
+
+    for i in range(num_bookings):
+        booking = {
+            "booking_id": random.randint(1000, 5000),
+            "listing_id": random.choice([13913, 17402, 24328, 33332, 116268, 117203, 127652, 127860]),
+            "user_id": random.randint(1000, 5000),
+            "booking_time": execution_date.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": random.choice(["confirmed", "cancelled", "pending"])
+        }
+        bookings.append(booking)
