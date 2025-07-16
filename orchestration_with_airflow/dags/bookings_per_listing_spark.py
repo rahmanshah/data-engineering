@@ -38,5 +38,8 @@ def main():
     
     aggregated.write.mode("overwrite").csv(args.output_path)
 
+    print(f"Aggregated results written to {args.output_path}")
+    spark.stop()
+
 if __name__ == '__main__':
     main()
