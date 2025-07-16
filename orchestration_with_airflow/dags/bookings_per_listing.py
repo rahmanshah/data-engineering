@@ -38,4 +38,4 @@ def bookings_spark_pipeline():
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    
+    fieldnames = ["booking_id", "listing_id", "user_id", "booking_time", "status"]
