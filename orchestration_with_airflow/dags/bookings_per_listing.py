@@ -33,3 +33,9 @@ def bookings_spark_pipeline():
             "status": random.choice(["confirmed", "cancelled", "pending"])
         }
         bookings.append(booking)
+    
+    directory = os.path.dirname(file_path)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    
