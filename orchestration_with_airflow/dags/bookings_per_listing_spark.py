@@ -13,6 +13,21 @@ def main():
     print(f"Reading bookings from {args.bookings_file}")
     spark = SparkSession.builder.appName("ListingsBookingsJoin").getOrCreate()
 
+    listings = spark.read.csv(args.listings_file,
+        header=True,
+        inferSchema=True,
+        sep=",",
+        quote='"',
+        escape='"',
+        multiLine=True,
+        mode="PERMISSIVE"
+    )
+
+    bookings = spark.read.csv(
+        args.bookings_file,
+        header=True,
+        inferSchema=True,
+    )
 
 if __name__ == '__main__':
     main()
