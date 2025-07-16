@@ -70,3 +70,7 @@ def bookings_spark_pipeline():
     )
 
     bookings_file = generate_bookings()
+    bookings_file >> spark_job
+
+
+dag_instance = bookings_spark_pipeline()
