@@ -31,7 +31,7 @@ def bookings_spark_pipeline():
         for i in range(num_bookings):
             booking = {
                 "booking_id": random.randint(1000, 5000),
-                "listing_id": random.choice([264776, 264782, 266037]),
+                "listing_id": random.choice([264776,264782,266037,268398,426354,427584,13913,15400 ]),
                 "user_id": random.randint(1000, 5000),
                 "booking_time": execution_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "status": random.choice(["confirmed", "cancelled", "pending"])

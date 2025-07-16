@@ -29,7 +29,12 @@ def main():
         inferSchema=True,
     )
 
-    aggregated = listings.join(bookings, listings["id"] == bookings["listing_id"], how="inner").groupBy("listing_id", "name", "price")
+    aggregated = listings \
+      .join(bookings, listings["id"] == bookings["listing_id"], how="inner") \
+      .groupBy("listing_id", "name", "price") \
+      .agg(
+        count("booking_id").alias("booking_count")
+      )
     
     aggregated.write.mode("overwrite").csv(args.output_path)
 
