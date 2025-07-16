@@ -35,6 +35,8 @@ def main():
       .agg(
         count("booking_id").alias("booking_count")
       )
+    
+    aggregated.write.mode("overwrite").csv(args.output_path)
 
 if __name__ == '__main__':
     main()
