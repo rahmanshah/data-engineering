@@ -15,4 +15,7 @@ import random
 )
 
 def bookings_spark_pipeline():
-    pass
+    context = get_current_context()
+    execution_date = context["execution_date"]
+
+    
