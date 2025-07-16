@@ -89,6 +89,7 @@ def bookings_spark_pipeline():
 
     bookings_file = generate_bookings()
     bookings_file >> create_output_dir >> spark_job
+    wait_for_listings_file >> spark_job
 
 
 dag_instance = bookings_spark_pipeline()
