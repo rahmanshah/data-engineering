@@ -18,4 +18,5 @@ def bookings_spark_pipeline():
     context = get_current_context()
     execution_date = context["execution_date"]
 
-    
+    file_date = execution_date.strftime("%Y-%m-%d_%H%M")
+    file_path = f"/tmp/data/bookings/{file_date}/bookings.csv"
