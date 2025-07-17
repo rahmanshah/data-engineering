@@ -30,7 +30,15 @@ def bookings_with_postgres_spark_pipeline():
         start_of_minute = execution_date.replace(second=0, microsecond=0)
         end_of_minute = start_of_minute + timedelta(minutes=1)
 
+        pg_hook = PostgresHook(postgres_conn_id="postgres_default")
 
+        query = f"""
+            SELECT booking_id, listing_id, user_id, booking_time, status
+            FROM bookings
+            WHERE booking_time >= '{start_of_minute.strftime('%Y-%m-%d %H:%M:%S')}'
+              AND booking_time < '{end_of_minute.strftime('%Y-%m-%d %H:%M:%S')}'
+        """
+        records = pg_hook.get_records(query)
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
