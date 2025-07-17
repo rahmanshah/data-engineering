@@ -7,6 +7,7 @@ import csv
 import random
 from airflow.operators.bash import BashOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
+from airflow.sensors.filesystem import FileSensor
 
 @dag(
     "bookings_with_postgres_spark_pipeline",
@@ -30,7 +31,7 @@ def bookings_with_postgres_spark_pipeline():
         start_of_minute = execution_date.replace(second=0, microsecond=0)
         end_of_minute = start_of_minute + timedelta(minutes=1)
 
-        pg_hook = PostgresHook(postgres_conn_id="postgres_default")
+        pg_hook = PostgresHook(postgres_conn_id="postgres_bookings")
 
         query = f"""
             SELECT booking_id, listing_id, user_id, booking_time, status
@@ -104,6 +105,5 @@ def bookings_with_postgres_spark_pipeline():
 
     bookings_file >> create_output_dir >> spark_job
     wait_for_listings_file >> spark_job
-
 
 dag_instance = bookings_with_postgres_spark_pipeline()
