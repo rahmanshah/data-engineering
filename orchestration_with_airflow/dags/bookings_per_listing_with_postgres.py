@@ -9,7 +9,7 @@ from airflow.operators.bash import BashOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 @dag(
-    "bookings_spark_pipeline",
+    "bookings_with_postgres_spark_pipeline",
     start_date=datetime(2025, 1, 1),
     schedule_interval="* * * * *",
     catchup=False,
@@ -106,4 +106,4 @@ def bookings_with_postgres_spark_pipeline():
     wait_for_listings_file >> spark_job
 
 
-dag_instance = bookings_spark_pipeline()
+dag_instance = bookings_with_postgres_spark_pipeline()
