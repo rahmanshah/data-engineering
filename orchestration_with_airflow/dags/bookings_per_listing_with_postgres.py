@@ -27,7 +27,10 @@ def bookings_with_postgres_spark_pipeline():
 
         file_path = f"/tmp/data/bookings/{file_date}/bookings.csv"
 
-        
+        start_of_minute = execution_date.replace(second=0, microsecond=0)
+        end_of_minute = start_of_minute + timedelta(minutes=1)
+
+
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
