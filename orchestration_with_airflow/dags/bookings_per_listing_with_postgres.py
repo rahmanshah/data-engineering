@@ -39,6 +39,10 @@ def bookings_with_postgres_spark_pipeline():
               AND booking_time < '{end_of_minute.strftime('%Y-%m-%d %H:%M:%S')}'
         """
         records = pg_hook.get_records(query)
+
+        bookings = []
+
+        print(f"Read {len(records)} from Postgres")
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
