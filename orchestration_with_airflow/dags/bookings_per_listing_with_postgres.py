@@ -57,6 +57,30 @@ def bookings_with_postgres_spark_pipeline():
         directory = os.path.dirname(file_path)
         if not os.path.exists(directory):
             os.makedirs(directory)
+
+        fieldnames = ["booking_id", "listing_id", "user_id", "booking_time", "status"]
+
+        with open(file_path, "w", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for booking in bookings:
+                writer.writerow({
+                    "booking_id": booking["booking_id"],
+                    "listing_id": booking["listing_id"],
+                    "user_id": booking["user_id"],
+                    "booking_time": booking["booking_time"],
+                    "status": booking["status"]
+                })
+
+        print(f"Generated bookings data written to {file_path}")
+
+    wait_for_listings_file = FileSensor(
+        task_id="wait_for_listings_file",
+        fs_conn_id="local_fs",
+        filepath="/tmp/data/listings/{{ execution_date.strftime('%Y-%m') }}/listings.csv.gz",
+        poke_interval=30,
+        timeout=600,
+    )
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
