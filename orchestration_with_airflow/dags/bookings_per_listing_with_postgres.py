@@ -20,7 +20,9 @@ def bookings_with_postgres_spark_pipeline():
 
     @task
     def read_bookings_from_postgres():
-        pass 
+        context = get_current_context()
+        execution_date = context["execution_date"]
+        file_date = execution_date.strftime("%Y-%m-%d_%H-%M")
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
