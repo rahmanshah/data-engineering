@@ -43,6 +43,16 @@ def bookings_with_postgres_spark_pipeline():
         bookings = []
 
         print(f"Read {len(records)} from Postgres")
+
+        for record in records:
+            booking = {
+                "booking_id": record[0],
+                "listing_id": record[1],
+                "user_id": record[2],
+                "booking_time": record[3].strftime('%Y-%m-%d %H:%M:%S'),
+                "status": record[4]
+            }
+            bookings.append(booking)
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
