@@ -53,6 +53,10 @@ def bookings_with_postgres_spark_pipeline():
                 "status": record[4]
             }
             bookings.append(booking)
+
+        directory = os.path.dirname(file_path)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
     ## creating output directory
     create_output_dir = BashOperator(
     task_id="create_output_directory",
