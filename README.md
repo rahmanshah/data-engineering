@@ -6,4 +6,6 @@
 
 ### Machine Learning with Spark
 
+### Apache Kafka Streaming
+
 #### more section will be added gradually and content will be updated as well
