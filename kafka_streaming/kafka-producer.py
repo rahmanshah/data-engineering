@@ -59,6 +59,7 @@ def main():
             value=json.dumps(order),
             callback=delivery_callback
         )
+        producer.poll(0)
 
         time.sleep(1)  # Sleep for 1 second before generating the next order
 if __name__ == "__main__":
