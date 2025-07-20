@@ -29,7 +29,12 @@ def generate_order():
     return order
 
 def main():
-    pass 
+    config = {
+        "bootstrap.servers": "localhost:9092"
+    }
+    producer = Producer(config)
+
+    topic = "orders"
 
 if __name__ == "__main__":
     main()
