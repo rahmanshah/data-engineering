@@ -28,6 +28,19 @@ def generate_order():
     }
     return order
 
+def delivery_callback(err, msg):
+        if err:
+            print("ERROR: Message failed delivery: {}".format(err))
+        else:
+            print(
+                textwrap.dedent(
+                f"""
+                    Produced event to topic {msg.topic()}:
+                    key = {msg.key().decode('utf-8')}
+                    value = {msg.value().decode('utf-8')}
+                """)
+            )
+
 def main():
     config = {
         "bootstrap.servers": "localhost:9092"
