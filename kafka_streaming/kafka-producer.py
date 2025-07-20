@@ -36,5 +36,16 @@ def main():
 
     topic = "orders"
 
+    while True:
+        order = generate_order()
+        print(f"Generated order: {order}")
+        
+        producer.produce(
+            topic,
+            key=str(order["customer_id"]),
+            value=json.dumps(order)
+        )
+
+        time.sleep(1)  # Sleep for 1 second before generating the next order
 if __name__ == "__main__":
     main()
