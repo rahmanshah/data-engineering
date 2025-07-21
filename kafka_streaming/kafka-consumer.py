@@ -16,5 +16,11 @@ def main():
     topic_name = args.topic_name
     consumer_name = args.name
 
+    consumer_config = {
+        "bootstrap.servers": "localhost:9092",
+        "group.id": group_id,
+        "auto.offset.reset": "earliest",
+    }
+
 if __name__ == "__main__":
     main()
