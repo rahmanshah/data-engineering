@@ -22,5 +22,8 @@ def main():
         "auto.offset.reset": "earliest",
     }
 
+    consumer = Consumer(consumer_config)
+    consumer.subscribe([topic_name])
+
 if __name__ == "__main__":
     main()
