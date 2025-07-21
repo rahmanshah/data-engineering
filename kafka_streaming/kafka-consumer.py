@@ -39,7 +39,14 @@ def main():
     try:
         while True:
             msg = consumer.poll(timeout=1.0)
-    
+            if msg is None:
+                continue
+            if msg.error():
+                print(f"[{consumer_name}] Error: {msg.error()}")
+                continue
+
+            process_message(consumer_name, msg)
+
     finally:
         consumer.close()
 
