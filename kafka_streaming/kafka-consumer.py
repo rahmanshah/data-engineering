@@ -3,6 +3,17 @@ import json
 
 from confluent_kafka import Consumer
 
+def process_message(consumer_name, msg):
+    value = msg.value()
+
+    order = json.loads(value.decode("utf-8"))
+    price = order.get("total_price", 0)
+    if price < 250:
+        return
+
+    print(
+        f"[{consumer_name}] [partition={msg.partition()}] Received order price={price}"
+    )
 
 def main():
     parser = argparse.ArgumentParser(description="Test Kafka consumer")
