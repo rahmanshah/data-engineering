@@ -12,5 +12,9 @@ def main():
 
     args = parser.parse_args()
 
+    group_id = args.group_id
+    topic_name = args.topic_name
+    consumer_name = args.name
+
 if __name__ == "__main__":
     main()
