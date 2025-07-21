@@ -25,5 +25,12 @@ def main():
     consumer = Consumer(consumer_config)
     consumer.subscribe([topic_name])
 
+    try:
+        while True:
+            msg = consumer.poll(timeout=1.0)
+    
+    finally:
+        consumer.close()
+
 if __name__ == "__main__":
     main()
