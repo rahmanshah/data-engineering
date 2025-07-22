@@ -14,5 +14,8 @@ def main():
         f"Starting to consume Wikipedia recent changes from {url} and produce to Kafka topic '{kafka_topic}'..."
     )
 
+    producer = Producer(producer_conf)
+    messages = SSEClient(url)
+
 if __name__ == "__main__":
     main()
