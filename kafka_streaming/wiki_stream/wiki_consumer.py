@@ -17,7 +17,16 @@ def main():
     print(f"Consuming messages from topic '{kafka_topic}'")
 
     try:
-        pass
+        while True:
+            msg = consumer.poll(1.0)
+            if msg is None:
+                continue
+            if msg.error():
+                print(f"ERROR: {msg.error()}", file=sys.stderr)
+                continue
+
+            print(f"Consumed message from topic '{msg.topic()}': {msg.value().decode('utf-8')}")
+
     finally:
         consumer.close()
 
