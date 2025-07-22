@@ -26,5 +26,18 @@ def main():
 
             id = data.get("id")
 
+            message = {
+                "id": id,
+                "type": data.get("type"),
+                "title": data.get("title"),
+                "user": data.get("user"),
+                "bot": data.get("bot"),
+                "comment": data.get("comment"),
+                "timestamp": data.get("timestamp"),
+                "minor": data.get("minor", False),
+            }
+
+            value = json.dumps(message)
+
 if __name__ == "__main__":
     main()
