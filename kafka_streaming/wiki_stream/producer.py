@@ -7,6 +7,18 @@ from sseclient import SSEClient
 producer_conf = {"bootstrap.servers": "localhost:9092"}
 kafka_topic = "wikipedia-changes"
 
+def delivery_callback(err, msg):
+    if err:
+        print("ERROR: Message failed delivery: {}".format(err))
+    else:
+        print(
+            textwrap.dedent(f"""
+        Produced event to topic {msg.topic()}:
+        key = {msg.key().decode('utf-8')}
+        value = {msg.value().decode('utf-8')}
+        """)
+        )
+
 def main():
     url = "https://stream.wikimedia.org/v2/stream/recentchange"
 
@@ -43,6 +55,7 @@ def main():
                 topic = kafka_topic,
                 value = value,
                 key = str(id),
+                callback = delivery_callback
             )
             producer.poll(0)
 
