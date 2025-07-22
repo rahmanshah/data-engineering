@@ -11,7 +11,10 @@ consumer_conf = {
 kafka_topic = "wikipedia-changes"
 
 def main():
-    pass 
+    consumer = Consumer(consumer_conf)
+    consumer.subscribe([kafka_topic])
+
+    print(f"Consuming messages from topic '{kafka_topic}'")
 
 if __name__ == "__main__":
     main()
