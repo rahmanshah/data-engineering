@@ -21,11 +21,25 @@ def main():
             msg = consumer.poll(1.0)
             if msg is None:
                 continue
+
             if msg.error():
                 print(f"ERROR: {msg.error()}", file=sys.stderr)
                 continue
 
-            print(f"Consumed message from topic '{msg.topic()}': {msg.value().decode('utf-8')}")
+            message_value = msg.value().decode('utf-8')
+
+            event = json.loads(message_value)
+            
+            bot = event.get("bot", False)
+            minor = event.get("minor", True)
+            user = event.get("user", "Unknown")
+            title = event.get("title", "Unknown")
+
+            if bot and not minor:
+                print(f"Major bot edit detected: User '{user}' edited '{title}'")
+
+
+
 
     finally:
         consumer.close()
