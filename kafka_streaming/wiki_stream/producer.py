@@ -17,5 +17,14 @@ def main():
     producer = Producer(producer_conf)
     messages = SSEClient(url)
 
+    for event in messages:
+        if event.event == "message" and event.data:
+            try:
+                data = json.loads(event.data)
+            except json.JSONDecodeError:
+                continue
+
+            id = data.get("id")
+
 if __name__ == "__main__":
     main()
