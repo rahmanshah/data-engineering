@@ -39,5 +39,14 @@ def main():
 
             value = json.dumps(message)
 
+            producer.produce(
+                topic = kafka_topic,
+                value = value,
+                key = str(id),
+            )
+            producer.poll(0)
+
+    producer.flush()
+
 if __name__ == "__main__":
     main()
