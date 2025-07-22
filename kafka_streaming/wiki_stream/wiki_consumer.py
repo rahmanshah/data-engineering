@@ -16,5 +16,10 @@ def main():
 
     print(f"Consuming messages from topic '{kafka_topic}'")
 
+    try:
+        pass
+    finally:
+        consumer.close()
+
 if __name__ == "__main__":
     main()
