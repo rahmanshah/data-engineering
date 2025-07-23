@@ -6,7 +6,7 @@ sources:
     tables:
       - name: customers
         meta:
-          external_location: "read_json_auto('{{ env_var('HOME') }}/dbt/ecommerce_analytics/data/customers.json')"
+          external_location: read_json_auto('{{ env_var("HOME") }}/dbt/ecommerce_analytics/data/customers.json')
       - name: orders
         meta:
-          external_location: "read_json_auto('{{ env_var('HOME') }}/dbt/ecommerce_analytics/data/orders.json')"
+          external_location: read_json_auto('{{ env_var("HOME") }}/dbt/ecommerce_analytics/data/orders.json')

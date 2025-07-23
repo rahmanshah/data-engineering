@@ -1,5 +1,5 @@
 WITH source AS (
-    {{ source_query(source('json_files', 'customers')) }}
+    {{ source_query('json_files', 'customers') }}
 ),
 
 cleaned AS (
