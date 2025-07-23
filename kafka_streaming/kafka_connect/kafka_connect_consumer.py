@@ -2,7 +2,7 @@ import base64
 import json
 from decimal import Decimal
 
-from confluent_kafka import Consumer
+from confluent_kafka import Consumer, KafkaException
 
 consumer_config = {
     "bootstrap.servers": "localhost:9092",
@@ -17,7 +17,14 @@ def main():
     consumer.subscribe([topic])
 
     try:
-        pass
+        print(f"Consuming messages from topic '{topic}'")
+        while True:
+            msg = consumer.poll(1.0)
+
+            if msg is None:
+                continue
+            if msg.error():
+                raise KafkaException(msg.error())
     finally:
         consumer.close()
 
