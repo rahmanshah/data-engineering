@@ -10,6 +10,11 @@ consumer_config = {
     "auto.offset.reset": "earliest",
 }
 
+def decode_decimal(encoded_string, scale=2):
+    value_bytes = base64.b64decode(encoded_string)
+    unscaled_value = int.from_bytes(value_bytes, byteorder="big", signed=True)
+    return Decimal(unscaled_value) / Decimal(10**scale)
+
 def main():
     consumer = Consumer(consumer_config)
 
