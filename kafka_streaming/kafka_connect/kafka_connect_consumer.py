@@ -15,6 +15,17 @@ def decode_decimal(encoded_string, scale=2):
     unscaled_value = int.from_bytes(value_bytes, byteorder="big", signed=True)
     return Decimal(unscaled_value) / Decimal(10**scale)
 
+def process_message(msg):
+    value = msg.value()
+
+    order = json.loads(value.decode("utf-8"))
+    total_amount_bytes = (
+        order.get("payload", {}).get("after", {}).get("total_amount")
+    )
+
+    total_amount = decode_decimal(total_amount_bytes)
+    print(f"Received order with total amount={total_amount}")
+
 def main():
     consumer = Consumer(consumer_config)
 
