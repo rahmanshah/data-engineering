@@ -3,7 +3,7 @@ description: 'DBT project for ecommerce analytics'
 version: '1.0.0'
 config-version: 2
 
-profile: 'dev'
+profile: 'ecommerce_duckdb'
 
 model-paths: ["models"]
 seed-paths: ["seeds"]
