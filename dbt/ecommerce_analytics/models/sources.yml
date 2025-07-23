@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: json_files
+    schema: main
+    tables:
+      - name: customers
+        meta:
+          external_location: "read_json_auto('{{ env_var('HOME') }}/dbt/ecommerce_analytics/data/customers.json')"
+      - name: orders
+        meta:
+          external_location: "read_json_auto('{{ env_var('HOME') }}/dbt/ecommerce_analytics/data/orders.json')"
