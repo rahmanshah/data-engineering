@@ -16,5 +16,10 @@ def main():
     topic = "postgres-.public.orders"
     consumer.subscribe([topic])
 
+    try:
+        pass
+    finally:
+        consumer.close()
+
 if __name__ == "__main__":
     main()
