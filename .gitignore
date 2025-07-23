@@ -28,3 +28,4 @@ orchestration_with_airflow/*.txt
 orchestration_with_airflow/tests*
 orchestration_with_airflow/logs*
 orchestration_with_airflow/Dockerfile
+dbt/ecommerce_analytics/data/*

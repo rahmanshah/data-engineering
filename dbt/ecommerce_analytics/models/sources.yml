@@ -5,8 +5,6 @@ sources:
     schema: main
     tables:
       - name: customers
-        meta:
-          external_location: read_json_auto('{{ env_var("HOME") }}/dbt/ecommerce_analytics/data/customers.json')
+        description: Raw customer data from JSON files
       - name: orders
-        meta:
-          external_location: read_json_auto('{{ env_var("HOME") }}/dbt/ecommerce_analytics/data/orders.json')
+        description: Raw order data from JSON files

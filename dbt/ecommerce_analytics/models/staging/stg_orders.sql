@@ -1,5 +1,5 @@
 WITH source AS (
-    {{ source_query('json_files', 'orders') }}
+    SELECT * FROM read_json_auto('{{ project_root }}/data/orders.json')
 ),
 
 cleaned AS (
