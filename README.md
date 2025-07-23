@@ -1,4 +1,4 @@
-## Data Englineering with PySpark, Airflow
+## Data Englineering with PySpark, Airflow, Kafka, dbt
 
 ### Data processing with PySpark
 
