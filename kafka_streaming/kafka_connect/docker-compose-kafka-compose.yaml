@@ -38,3 +38,17 @@ services:
       VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: onlineshop
+    ports:
+      - "5432:5432"
+    command: 
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
