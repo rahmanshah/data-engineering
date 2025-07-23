@@ -41,6 +41,8 @@ def main():
                 continue
             if msg.error():
                 raise KafkaException(msg.error())
+            
+            process_message(msg)
     finally:
         consumer.close()
 
