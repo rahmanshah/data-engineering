@@ -11,7 +11,10 @@ consumer_config = {
 }
 
 def main():
-    pass 
+    consumer = Consumer(consumer_config)
+
+    topic = "postgres-.public.orders"
+    consumer.subscribe([topic])
 
 if __name__ == "__main__":
     main()
