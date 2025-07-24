@@ -56,3 +56,9 @@ docker-compose exec dbt dbt test
 docker-compose exec dbt dbt docs generate
 docker-compose exec dbt dbt docs serve
 ```
+
+## Stop the containers
+
+```sh
+docker-compose down
+```
