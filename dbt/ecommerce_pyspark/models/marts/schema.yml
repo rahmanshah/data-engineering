@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: customer_orders
+    description: Aggregate customer order metrics
+    columns:
+      - name: customer_id
+        description: Primary key - unique customer identifier
+        tests:
+          - unique
+          - not_null
+      - name: number_of_orders
+        description: Total number of orders placed by customer
+      - name: total_amount
+        description: Total amount spent by customer
+      - name: customer_value_segment
+        description: Customer segmentation based on total spend
+        tests:
+          - accepted_values:
+              values: ['high_value', 'medium_value', 'low_value']
