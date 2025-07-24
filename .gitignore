@@ -34,3 +34,7 @@ dbt/ecommerce_analytics_using_seeds/seeds/*
 dbt/ecommerce_analytics_using_seeds/package-lock.yml
 dbt/ecommerce_analytics_using_seeds/dev.duckdb
 dbt/logs/*.log
+dbt/ecommerce_pyspark/metastore_db*
+dbt/ecommerce_pyspark/spark-warehouse/*
+dbt/ecommerce_pyspark/derby.log
+dbt/ecommerce_pyspark/package-lock.yml
