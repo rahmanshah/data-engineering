@@ -29,3 +29,8 @@ orchestration_with_airflow/tests*
 orchestration_with_airflow/logs*
 orchestration_with_airflow/Dockerfile
 dbt/ecommerce_analytics/data/*
+dbt/ecommerce_analytics_using_seeds/data/*
+dbt/ecommerce_analytics_using_seeds/seeds/*
+dbt/ecommerce_analytics_using_seeds/package-lock.yml
+dbt/ecommerce_analytics_using_seeds/dev.duckdb
+dbt/logs/*.log

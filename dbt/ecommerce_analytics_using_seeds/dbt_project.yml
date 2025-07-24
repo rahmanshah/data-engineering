@@ -1,8 +1,8 @@
-name: 'ecommerce_dbt'
+name: 'ecommerce_analytics_using_seeds'
 version: '1.0.0'
 config-version: 2
 
-profile: 'ecommerce_dbt'
+profile: 'ecommerce_analytics_using_seeds'
 
 model-paths: ["models"]
 seed-paths: ["seeds"]
