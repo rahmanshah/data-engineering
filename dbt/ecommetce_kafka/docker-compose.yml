@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # Kafka in KRaft mode (no ZooKeeper)
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - kafka_data:/bitnami/kafka
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=dbt_user
+      - POSTGRES_PASSWORD=dbt_password
+      - POSTGRES_DB=ecommerce_kafka
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbt_user -d ecommerce_kafka"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Kafka topic setup
+  kafka-setup:
+    image: bitnami/kafka:latest
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: [ "/bin/sh", "-c" ]
+    command: |
+      "
+      # Wait for Kafka to be fully up
+      sleep 10
+      
+      # Create topics
+      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic customers --partitions 3 --replication-factor 1
+      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic orders --partitions 3 --replication-factor 1
+      
+      echo 'Kafka topics created'
+      "
+
+  # dbt container
+  dbt:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DBT_PROFILES_DIR=/app/profiles
+    command: ["tail", "-f", "/dev/null"]  # Keeps container running for exec commands
+
+  # Kafka producer for sample data
+  kafka-producer:
+    build:
+      context: .
+      dockerfile: Dockerfile.producer
+    volumes:
+      - ./scripts:/app/scripts
+    depends_on:
+      - kafka-setup
+    command: ["tail", "-f", "/dev/null"]  # Keeps container running for exec commands
+
+  # Kafka consumer to load data into PostgreSQL
+  kafka-consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.consumer
+    volumes:
+      - ./scripts:/app/scripts
+    depends_on:
+      - kafka-setup
+      - postgres
+    command: ["tail", "-f", "/dev/null"]  # Keeps container running for exec commands
+
+volumes:
+  kafka_data:
+  postgres_data:
