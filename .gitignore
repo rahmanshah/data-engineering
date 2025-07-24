@@ -38,3 +38,9 @@ dbt/ecommerce_pyspark/metastore_db*
 dbt/ecommerce_pyspark/spark-warehouse/*
 dbt/ecommerce_pyspark/derby.log
 dbt/ecommerce_pyspark/package-lock.yml
+
+dbt/ecommerce_kafka/dbt_packages/
+dbt/ecommerce_kafka/target/
+dbt/ecommerce_kafka/logs/
+dbt/ecommerce_kafka/package-lock.yml
+dbt/ecommerce_kafka/profiles/.user.yml
