@@ -8,7 +8,7 @@ spark = SparkSession.builder \
 
 column_names = ["language", "framework", "users"]
 data = [
-    ("Python", "FastAPI", 20000), 
+    ("Python", "FastAPI", 9000), 
     ("Python", "FastAPI", 9000), 
     ("Java", "Spring", 7000), 
     ("JavaScript", "ReactJS", 5000)
