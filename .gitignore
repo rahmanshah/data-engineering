@@ -44,3 +44,4 @@ dbt/ecommerce_kafka/target/
 dbt/ecommerce_kafka/logs/
 dbt/ecommerce_kafka/package-lock.yml
 dbt/ecommerce_kafka/profiles/.user.yml
+docker/pyspark_docker_24/data/*
