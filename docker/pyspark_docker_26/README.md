@@ -1,4 +1,4 @@
-# PySpark - Add an ID Column to a DataFrame
+# PySpark - Window Functions
 
 ## Introduction
 #### Window functions in PySpark are a powerful feature for data manipulation and analysis. They allow us to perform complex calculations on subsets of data within a DataFrame, without the need for expensive joins or subqueries.we will use the window functions row_number(), rank() and dense_rank() of PySpark with a certain window specification.
