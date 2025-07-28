@@ -4,6 +4,7 @@ from pyspark.sql import SparkSession
 # Create a Spark session
 spark = SparkSession.builder \
     .appName("DataFrameSparkApp") \
+    .config("spark.jars.packages", "com.crealytics:spark-excel_2.12:0.14.0") \
     .getOrCreate()
 
 # Read a excel file into a DataFrame ussing the `spark-excel` library
@@ -12,7 +13,7 @@ df = spark.read \
     .option("header", "true") \
     .option("inferSchema", "true") \
     .option("dataAddress", "'Sheet1'!A1") \
-    .load("data/sales.xlsx")
+    .load("data/Book.xlsx")
 
 # Show the DataFrame content
 print("DataFrame Content:")
