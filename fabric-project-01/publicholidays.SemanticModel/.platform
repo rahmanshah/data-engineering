@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "publicholidays"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "857cdf0a-2e2b-94d9-47b3-6e1a31d4325f"
+  }
+}
