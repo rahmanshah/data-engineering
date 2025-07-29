@@ -1,1 +1,1 @@
-This is an auto-created file for fabric-project-01
+Fabric items created in a workspace sync properly as expected in repo
