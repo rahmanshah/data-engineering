@@ -1690,6 +1690,257 @@
         ]
       },
       {
+        "name": "sales_amout_gt_500",
+        "sourceLineageTag": "[dbo].[sales_amout_gt_500]",
+        "columns": [
+          {
+            "name": "DateID",
+            "dataType": "int64",
+            "sourceColumn": "DateID",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "DateID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "MedallionID",
+            "dataType": "int64",
+            "sourceColumn": "MedallionID",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "MedallionID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "HackneyLicenseID",
+            "dataType": "int64",
+            "sourceColumn": "HackneyLicenseID",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "HackneyLicenseID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "PickupTimeID",
+            "dataType": "int64",
+            "sourceColumn": "PickupTimeID",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "PickupTimeID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "DropoffTimeID",
+            "dataType": "int64",
+            "sourceColumn": "DropoffTimeID",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "DropoffTimeID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "PassengerCount",
+            "dataType": "int64",
+            "sourceColumn": "PassengerCount",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "PassengerCount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TripDurationSeconds",
+            "dataType": "int64",
+            "sourceColumn": "TripDurationSeconds",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "TripDurationSeconds",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TripDistanceMiles",
+            "dataType": "double",
+            "sourceColumn": "TripDistanceMiles",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "TripDistanceMiles",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "PaymentType",
+            "dataType": "string",
+            "sourceColumn": "PaymentType",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "PaymentType",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "FareAmount",
+            "dataType": "int64",
+            "sourceColumn": "FareAmount",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "FareAmount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "SurchargeAmount",
+            "dataType": "int64",
+            "sourceColumn": "SurchargeAmount",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "SurchargeAmount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TaxAmount",
+            "dataType": "int64",
+            "sourceColumn": "TaxAmount",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "TaxAmount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TipAmount",
+            "dataType": "int64",
+            "sourceColumn": "TipAmount",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "TipAmount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TollsAmount",
+            "dataType": "int64",
+            "sourceColumn": "TollsAmount",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "TollsAmount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "TotalAmount",
+            "dataType": "int64",
+            "sourceColumn": "TotalAmount",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "TotalAmount",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "sales_amout_gt_500",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "sales_count_btw_40_and_50",
         "sourceLineageTag": "[dbo].[sales_count_btw_40_and_50]",
         "columns": [
