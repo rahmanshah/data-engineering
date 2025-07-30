@@ -46,3 +46,15 @@ display(df.limit(2))
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+df = spark.read.table("MyFirstLakehouse.sales")
+display(df.limit(2))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
