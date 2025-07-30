@@ -100,6 +100,191 @@
         },
         "name": "Sales_data_2019",
         "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings",
+              "skipLineCount": 0
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "fileName": "2021.csv"
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": false
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MyFirstLakehouse",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a7b87f04-0030-b40e-4c39-5bc4e7714d98",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "tableOption": "autoCreate",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "2021"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MyFirstWarehouse",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "7fa8922e-be68-4074-9e1e-07dce3c59275",
+                    "endpoint": "fqxp3yc7jxjuzgg4fvuysuja24-fx23shp5sqlu5kojzkuffn6pbq.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "1db9f52d-94fd-4e17-a9c9-caa852b7cf0c"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 1
+                },
+                "sink": {
+                  "name": "Column1",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 2
+                },
+                "sink": {
+                  "name": "Column2",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 3
+                },
+                "sink": {
+                  "name": "Column3",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 4
+                },
+                "sink": {
+                  "name": "Column4",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 5
+                },
+                "sink": {
+                  "name": "Column5",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 6
+                },
+                "sink": {
+                  "name": "Column6",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 7
+                },
+                "sink": {
+                  "name": "Column7",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 8
+                },
+                "sink": {
+                  "name": "Column8",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 9
+                },
+                "sink": {
+                  "name": "Column9",
+                  "physicalType": "varchar",
+                  "length": "8000"
+                }
+              }
+            ]
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Sales_data_2021",
+        "dependsOn": []
       }
     ]
   }
