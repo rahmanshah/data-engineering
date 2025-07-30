@@ -1690,6 +1690,45 @@
         ]
       },
       {
+        "name": "sales_count_btw_40_and_50",
+        "sourceLineageTag": "[dbo].[sales_count_btw_40_and_50]",
+        "columns": [
+          {
+            "name": "No_of_sales",
+            "dataType": "int64",
+            "sourceColumn": "No_of_sales",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "No_of_sales",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "sales_count_btw_40_and_50",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "vw_PaymentAnalysis",
         "sourceLineageTag": "[dbo].[vw_PaymentAnalysis]",
         "columns": [

@@ -1,0 +1,3 @@
+-- Auto Generated (Do not modify) 4177823DA9D539A2FEBB36743458AB496D0A1939C6B9DC0748035CAC5FB4EE9D
+CREATE VIEW [dbo].[sales_count_btw_40_and_50] AS (SELECT COUNT(*) AS No_of_sales FROM sales
+where UnitPrice BETWEEN 40 AND 50)
