@@ -132,3 +132,19 @@ df.write.mode('overwrite').format('delta').saveAsTable('framework')
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# #### Reading delta table into a PySpark dataframe
+
+# CELL ********************
+
+framework_df = spark.read.format("delta").table("framework")
+display(framework_df)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
