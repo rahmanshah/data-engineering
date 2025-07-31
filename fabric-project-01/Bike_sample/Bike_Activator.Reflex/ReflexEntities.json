@@ -1,0 +1,85 @@
+[
+  {
+    "uniqueIdentifier": "3623405e-e52f-48db-9897-cfbf1289f61b",
+    "payload": {
+      "name": "Bike_RTDashboard",
+      "type": "kqlQueries"
+    },
+    "type": "container-v1"
+  },
+  {
+    "uniqueIdentifier": "004c3109-b641-41d8-a999-c4f45fda2d00",
+    "payload": {
+      "name": "sample event",
+      "runSettings": {
+        "executionIntervalInSeconds": 86400
+      },
+      "query": {
+        "queryString": "declare query_parameters (startTime:datetime, _placeHolder__end:datetime);\n            let InNeighborhood = dynamic(null);\n            let InStreet = dynamic(null);\n            // baseQuery FilterBikeStream\n            let FilterBikeStream = () {\n                // Please enter your KQL query (Example):\n                Bikestream\n                | where isempty(['InNeighborhood']) or Neighbourhood in (['InNeighborhood']) // Multiple selection filtering\n                | where isempty(['InStreet']) or Street in (['InStreet']) // Multiple selection filtering\n                | extend ingestionTime = ingestion_time()\n                | extend fill_rate = toreal(No_Bikes) / (No_Bikes + No_Empty_Docks)\n            };\n            // Please enter your KQL query (Example):\n            // <table name>\n            // | where isempty(['InNeighborhood']) or <column name> in (['InNeighborhood']) // Multiple selection filtering\n            // | where isempty(['InStreet']) or <column name> in (['InStreet']) // Multiple selection filtering\n            // | take 100\n            let minimumTime = toscalar(FilterBikeStream | summarize min(ingestionTime));\n            let from=max_of(startTime, minimumTime);\n            FilterBikeStream\n            | make-series emptyDocks=max(No_Empty_Docks)  default=int(null)\n                on ingestionTime from from to now() step max_of((now() - from)/100, 2m) by BikepointID\n            | extend emptyDocks = series_fill_linear(emptyDocks)\n            | mvexpand emptyDocks, ingestionTime\n            | summarize ['Available Docks'] = sum(toint(emptyDocks)) by todatetime(ingestionTime)"
+      },
+      "eventhouseItem": {
+        "itemId": "21566c3f-8e9b-bfea-4b45-eaa73965fae5",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemType": "KustoDatabase"
+      },
+      "eventTimeSettings": {
+        "ingestionDelayInSeconds": 0,
+        "timeFieldName": "ingestionTime"
+      },
+      "queryParameters": [
+        {
+          "name": "startTime",
+          "type": "DURATION_START",
+          "value": "datetime(1990-04-20T07:21:51Z)"
+        },
+        {
+          "name": "_placeHolder__end",
+          "type": "DURATION_END",
+          "value": "datetime(2025-04-20T08:21:51Z)"
+        }
+      ],
+      "metadata": {
+        "workspaceId": "1db9f52d-94fd-4e17-a9c9-caa852b7cf0c",
+        "measureName": "Available Docks",
+        "dashboardId": "b51e60c0-85fd-4463-af2b-4fcc196f9a32",
+        "visualId": "44aed475-6157-4089-9e5d-142fbd9502d3"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "3623405e-e52f-48db-9897-cfbf1289f61b"
+      }
+    },
+    "type": "kqlSource-v1"
+  },
+  {
+    "uniqueIdentifier": "04696645-1da3-4283-bd8f-477dc7da4b9e",
+    "payload": {
+      "name": "sample event",
+      "parentContainer": {
+        "targetUniqueIdentifier": "3623405e-e52f-48db-9897-cfbf1289f61b"
+      },
+      "definition": {
+        "type": "Event",
+        "instance": "{\"templateId\":\"SourceEvent\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"SourceEventStep\",\"id\":\"7b532e28-c241-4466-9713-ec90a65f855f\",\"rows\":[{\"name\":\"SourceSelector\",\"kind\":\"SourceReference\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"004c3109-b641-41d8-a999-c4f45fda2d00\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "87de8401-ac3b-4bfd-a2df-f4fe17c79e3b",
+    "payload": {
+      "name": "sample alert",
+      "parentContainer": {
+        "targetUniqueIdentifier": "3623405e-e52f-48db-9897-cfbf1289f61b"
+      },
+      "definition": {
+        "type": "Rule",
+        "instance": "{\"templateId\":\"EventTrigger\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"FieldsDefaultsStep\",\"id\":\"97578ecd-6480-41a0-956c-e8ce962dd59f\",\"rows\":[{\"name\":\"EventSelector\",\"kind\":\"Event\",\"arguments\":[{\"kind\":\"EventReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"04696645-1da3-4283-bd8f-477dc7da4b9e\"}],\"name\":\"event\"}]}]},{\"name\":\"EventDetectStep\",\"id\":\"d5b82615-b57c-445c-ad57-8438b8299dc1\",\"rows\":[{\"name\":\"EventFieldSelector\",\"kind\":\"EventField\",\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"Available Docks\"}]},{\"name\":\"NumberValueCondition\",\"kind\":\"NumberValueCondition\",\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"IsGreaterThan\"},{\"name\":\"threshold\",\"type\":\"number\",\"value\":1000.0}]}]},{\"name\":\"ActStep\",\"id\":\"78dd3266-dad3-4bf5-b4a3-db358e73b9c0\",\"rows\":[{\"name\":\"EmailBinding\",\"kind\":\"EmailMessage\",\"arguments\":[{\"name\":\"messageLocale\",\"type\":\"string\",\"value\":\"\"},{\"name\":\"sentTo\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"user1@rahmanshahprotonmail.onmicrosoft.com\"}]},{\"name\":\"copyTo\",\"type\":\"array\",\"values\":[]},{\"name\":\"bCCTo\",\"type\":\"array\",\"values\":[]},{\"name\":\"subject\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"Activator Alert: Daily Available Docks Report\"}]},{\"name\":\"headline\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"New event from sample\"}]},{\"name\":\"optionalMessage\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"\"}]},{\"name\":\"additionalInformation\",\"type\":\"array\",\"values\":[]}]}]}]}",
+        "settings": {
+          "shouldRun": true,
+          "shouldApplyRuleOnUpdate": false
+        }
+      }
+    },
+    "type": "timeSeriesView-v1"
+  }
+]
