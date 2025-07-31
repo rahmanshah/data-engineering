@@ -1,1 +1,1 @@
-Fabric items created in a workspace sync properly as expected in repo
+Multi-experiemce (data engineering, data factory, data science, PowerBI, Real-time Intellifence) fabric items created in a workspace sync properly as expected in repo
