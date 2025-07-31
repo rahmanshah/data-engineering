@@ -2018,6 +2018,131 @@
         ]
       },
       {
+        "name": "student",
+        "sourceLineageTag": "[dbo].[student]",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "string",
+            "sourceColumn": "id",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "name",
+            "dataType": "string",
+            "sourceColumn": "name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "birthdate",
+            "dataType": "dateTime",
+            "sourceColumn": "birthdate",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "birthdate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "enrollment_year",
+            "dataType": "int64",
+            "sourceColumn": "enrollment_year",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "enrollment_year",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "major",
+            "dataType": "string",
+            "sourceColumn": "major",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "major",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "dataType": "string",
+            "sourceColumn": "gender",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "gender",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "creditpoints",
+            "dataType": "int64",
+            "sourceColumn": "creditpoints",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "creditpoints",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "student",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "trip_table_info",
         "sourceLineageTag": "[dbo].[trip_table_info]",
         "columns": [
