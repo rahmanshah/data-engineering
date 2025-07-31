@@ -93,3 +93,42 @@ display(df_products.limit(5))
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ## PySpark dataframe
+
+# CELL ********************
+
+data = [
+    ("Python", "Django", 20000),
+    ("Python", "FastAPI", 9000),
+    ("Java", "Spring", 7000),
+    ("JavaScript", "ReactJS", 5000)
+]
+column_names = ["language", "framework", "users"]
+
+df = spark.createDataFrame(data, column_names)
+display(df)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# #### Writing PySpark dataframe into a delta table
+
+# CELL ********************
+
+df.write.mode('overwrite').format('delta').saveAsTable('framework')
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
