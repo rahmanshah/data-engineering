@@ -1529,6 +1529,44 @@
         ]
       },
       {
+        "name": "ny_counties",
+        "sourceLineageTag": "[dbo].[ny_counties]",
+        "columns": [
+          {
+            "name": "County",
+            "dataType": "string",
+            "sourceColumn": "County",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "County",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "ny_counties",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "sales",
         "sourceLineageTag": "[dbo].[sales]",
         "columns": [
@@ -1967,6 +2005,58 @@
             "source": {
               "type": "entity",
               "entityName": "sales_count_btw_40_and_50",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "trip_table_info",
+        "sourceLineageTag": "[dbo].[trip_table_info]",
+        "columns": [
+          {
+            "name": "COLUMN_NAME",
+            "dataType": "string",
+            "sourceColumn": "COLUMN_NAME",
+            "sourceProviderType": "nvarchar",
+            "sourceLineageTag": "COLUMN_NAME",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "DATA_TYPE",
+            "dataType": "string",
+            "sourceColumn": "DATA_TYPE",
+            "sourceProviderType": "nvarchar",
+            "sourceLineageTag": "DATA_TYPE",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "trip_table_info",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
