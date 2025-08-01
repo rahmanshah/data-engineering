@@ -1529,6 +1529,101 @@
         ]
       },
       {
+        "name": "cross_apply",
+        "sourceLineageTag": "[dbo].[cross_apply]",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "string",
+            "sourceColumn": "id",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "name",
+            "dataType": "string",
+            "sourceColumn": "name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "major",
+            "dataType": "string",
+            "sourceColumn": "major",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "major",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "creditpoints",
+            "dataType": "int64",
+            "sourceColumn": "creditpoints",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "creditpoints",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "credit_category",
+            "dataType": "string",
+            "sourceColumn": "credit_category",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "credit_category",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "cross_apply",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "ny_counties",
         "sourceLineageTag": "[dbo].[ny_counties]",
         "columns": [
