@@ -10,6 +10,6 @@
 
 ### dbt
 
-### Microsoft Fabric
+### Microsoft Fabric ( synampse data engineering, Azure data factory, data science, PowerBI, Real-time Intellifence )
 
 #### more section will be added gradually and content will be updated as well
