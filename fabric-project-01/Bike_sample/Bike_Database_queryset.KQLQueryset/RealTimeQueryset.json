@@ -1,0 +1,22 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "2a4cec41-99ba-4a09-8e8f-8b0fb22c4bda",
+        "clusterUri": "",
+        "type": "Fabric",
+        "databaseItemId": "21566c3f-8e9b-bfea-4b45-eaa73965fae5",
+        "databaseItemName": "Bike_Database"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "977eab65-9a16-4291-9053-4278a5e4cad6",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data\nBikestream\n| take 100\n\n// See how many records are in the table.\nBikestream\n| count\n\n// This query returns the number of ingestions per hour in the given table.\nBikestream\n| summarize IngestionCount = count() by bin(ingestion_time(), 1h)\n\n",
+        "title": "Tab",
+        "dataSourceId": "2a4cec41-99ba-4a09-8e8f-8b0fb22c4bda"
+      }
+    ]
+  }
+}
