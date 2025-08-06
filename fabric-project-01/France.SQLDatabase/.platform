@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SQLDatabase",
+    "displayName": "France"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "91b1ff7d-6ce9-b626-4c7d-47f7c0d1cf01"
+  }
+}
