@@ -4,7 +4,8 @@ CREATE TABLE [dbo].[orderlines] (
     [prod_id]     INT      NOT NULL,
     [quantity]    SMALLINT NOT NULL,
     [orderdate]   DATE     NOT NULL,
-    CONSTRAINT [PK_orderlines] PRIMARY KEY CLUSTERED ([orderid] ASC, [orderlineid] ASC)
+    CONSTRAINT [PK_orderlines] PRIMARY KEY CLUSTERED ([orderid] ASC, [orderlineid] ASC),
+    CONSTRAINT [fk_orderid] FOREIGN KEY ([orderid]) REFERENCES [dbo].[orders] ([orderid]) ON DELETE CASCADE
 );
 
 

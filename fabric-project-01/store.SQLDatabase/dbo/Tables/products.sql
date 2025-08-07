@@ -6,7 +6,8 @@ CREATE TABLE [dbo].[products] (
     [price]          DECIMAL (12, 2) NOT NULL,
     [special]        SMALLINT        NULL,
     [common_prod_id] INT             NOT NULL,
-    PRIMARY KEY CLUSTERED ([prod_id] ASC)
+    PRIMARY KEY CLUSTERED ([prod_id] ASC),
+    CONSTRAINT [fk_prod_category] FOREIGN KEY ([category]) REFERENCES [dbo].[categories] ([category])
 );
 
 
