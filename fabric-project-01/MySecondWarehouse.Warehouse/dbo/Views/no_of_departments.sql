@@ -1,0 +1,2 @@
+-- Auto Generated (Do not modify) 5DA5210B7FD597396E16E5208139F5B88E1D0F022B7F52D792E3B404C18CF638
+CREATE VIEW [dbo].[no_of_departments] AS (SELECT COUNT(*) AS #Department FROM departments)

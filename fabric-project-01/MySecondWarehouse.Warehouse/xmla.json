@@ -342,6 +342,45 @@
         ]
       },
       {
+        "name": "no_of_departments",
+        "sourceLineageTag": "[dbo].[no_of_departments]",
+        "columns": [
+          {
+            "name": "#Department",
+            "dataType": "int64",
+            "sourceColumn": "#Department",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "#Department",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "no_of_departments",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "salaries",
         "sourceLineageTag": "[dbo].[salaries]",
         "columns": [
