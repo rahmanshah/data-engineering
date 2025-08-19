@@ -342,6 +342,74 @@
         ]
       },
       {
+        "name": "job_title_min_max_salary",
+        "sourceLineageTag": "[dbo].[job_title_min_max_salary]",
+        "columns": [
+          {
+            "name": "max_salary",
+            "dataType": "int64",
+            "sourceColumn": "max_salary",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "max_salary",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "min_salary",
+            "dataType": "int64",
+            "sourceColumn": "min_salary",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "min_salary",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "dataType": "string",
+            "sourceColumn": "title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "job_title_min_max_salary",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "no_of_departments",
         "sourceLineageTag": "[dbo].[no_of_departments]",
         "columns": [
