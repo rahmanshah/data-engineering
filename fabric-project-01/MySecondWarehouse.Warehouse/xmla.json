@@ -449,6 +449,59 @@
         ]
       },
       {
+        "name": "number_of_department_managers",
+        "sourceLineageTag": "[dbo].[number_of_department_managers]",
+        "columns": [
+          {
+            "name": "Department",
+            "dataType": "string",
+            "sourceColumn": "Department",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Department",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "NUMBER_of_Manager",
+            "dataType": "int64",
+            "sourceColumn": "NUMBER_of_Manager",
+            "formatString": "0",
+            "sourceProviderType": "int",
+            "sourceLineageTag": "NUMBER_of_Manager",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "number_of_department_managers",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
         "name": "salaries",
         "sourceLineageTag": "[dbo].[salaries]",
         "columns": [
