@@ -115,3 +115,78 @@ web_activities_raw.write.format("delta").mode("overwrite").saveAsTable("web_acti
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ### Silver layer - Cleaning the data
+
+# MARKDOWN ********************
+
+# #### Customer Data
+
+# CELL ********************
+
+display(customers_raw.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+customers_clean = (
+    customers_raw
+    .withColumn('email',lower(trim(col('EMAIL'))))
+    .withColumn('name',initcap(trim(col('name'))))
+    .withColumn('gender',when(lower(col('gender')).isin('f','female'),'Female')
+                        .when(lower(col('gender')).isin('m','male'),'Male')
+                        .otherwise('Other'))
+    .withColumn('dob',to_date(regexp_replace(col('dob'),'/','-')))
+    .withColumn('location',initcap(col('location')))
+    .drop_duplicates(['customer_id'])
+    .dropna(subset=['customer_id','email'])
+)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(customers_clean.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+customers_clean.write.format("delta").mode("overwrite").saveAsTable("silver_customer")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
