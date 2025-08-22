@@ -201,7 +201,8 @@ customers_clean.write.format("delta").mode("overwrite").saveAsTable("silver_cust
 
 # CELL ********************
 
-
+import re
+import pandas as pd
 # Function to identify formats
 def detect_date_format(date_str):
     if pd.isna(date_str):
@@ -265,5 +266,54 @@ df.groupBy("format").count().orderBy("count", ascending=False).show()
 
 # META {
 # META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+orders_clean = (
+    orders_raw
+    .withColumn("order_date", 
+                when(col("order_date").rlike("^\d{4}/\d{2}/\d{2}$"), to_date(col("order_date"), "yyyy/MM/dd"))
+                .when(col("order_date").rlike("^\d{2}-\d{2}-\d{4}$"), to_date(col("order_date"), "dd-MM-yyyy"))
+                .when(col("order_date").rlike("^\d{8}$"), to_date(col("order_date"), "yyyyMMdd"))
+                .otherwise(to_date(col("order_date"), "yyyy-MM-dd")))
+    .withColumn("amount", col("amount").cast(DoubleType()))
+    .withColumn("amount", when(col("amount") < 0, None).otherwise(col("amount")))
+    .withColumn("status", initcap(col("status")))
+    .dropna(subset=["customer_id", "order_date"])
+    .dropDuplicates(["order_id"])
+)
+display(orders_clean.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+orders_clean.write.format("delta").mode("overwrite").saveAsTable("silver_orders")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_orders
+# MAGIC LIMIT 5
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
