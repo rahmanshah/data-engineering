@@ -371,3 +371,54 @@ df.groupBy("format").count().orderBy("count", ascending=False).show()
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+payments = spark.table("payments")
+payments_clean = (
+    payments
+    .withColumn("payment_date", to_date(regexp_replace(col("payment_date"), "/", "-")))
+    .withColumn("payment_date", 
+                when(col("payment_date").rlike("^\d{2}-\d{2}-\d{4}$"), to_date(col("payment_date"), "dd-MM-yyyy"))
+                .when(col("payment_date").rlike("^\d{8}$"), to_date(col("payment_date"), "yyyyMMdd"))
+                .otherwise(to_date(col("payment_date"), "yyyy-MM-dd")))
+    .withColumn("payment_method", initcap(col("payment_method")))
+    .replace({"creditcard": "Credit Card"}, subset=["payment_method"])
+    .withColumn("payment_status", initcap(col("payment_status")))
+    .withColumn("amount", col("amount").cast(DoubleType()))
+    .withColumn("amount", when(col("amount") < 0, None).otherwise(col("amount")))
+    .dropna(subset=["customer_id", "payment_date", "amount"])
+)
+display(payments_clean.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+payments_clean.write.format("delta").mode("overwrite").saveAsTable("silver_payments")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_payments
+# MAGIC LIMIT 5
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
