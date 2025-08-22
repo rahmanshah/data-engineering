@@ -96,3 +96,22 @@ display(web_activities_raw.limit(5))
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ### Create bronze table from dataframe
+
+# CELL ********************
+
+customers_raw.write.format("delta").mode("overwrite").saveAsTable("customers")
+orders_raw.write.format("delta").mode("overwrite").saveAsTable("orders")
+payments_raw.write.format("delta").mode("overwrite").saveAsTable("payments")
+support_tickets_raw.write.format("delta").mode("overwrite").saveAsTable("support_tickets")
+web_activities_raw.write.format("delta").mode("overwrite").saveAsTable("web_activities")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
