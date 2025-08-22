@@ -190,3 +190,80 @@ customers_clean.write.format("delta").mode("overwrite").saveAsTable("silver_cust
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# #### Order data clean up
+
+# MARKDOWN ********************
+
+# ##### Checking order_date column data formats
+
+# CELL ********************
+
+
+# Function to identify formats
+def detect_date_format(date_str):
+    if pd.isna(date_str):
+        return 'Missing/NaN'
+    
+    try:
+        date_str = str(date_str).strip()
+        
+        if re.match(r'^\d{4}-\d{2}-\d{2}$', date_str):
+            return 'YYYY-MM-DD'
+        elif re.match(r'^\d{4}\d{2}\d{2}$', date_str):
+            return 'YYYYMMDD'
+        elif re.match(r'^\d{2}/\d{2}/\d{4}$', date_str):
+            return 'MM/DD/YYYY'
+        elif re.match(r'^\d{4}/\d{2}/\d{2}$', date_str):
+            return 'YYYY/MM/DD'
+        elif re.match(r'^\d{2}\.\d{2}\.\d{4}$', date_str):
+            return 'DD.MM.YYYY'
+        elif re.match(r'^\d{2}-\d{2}-\d{4}$', date_str):
+            return 'MM-DD-YYYY'
+        elif re.match(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$', date_str):
+            return 'YYYY-MM-DD HH:MM:SS'
+        else:
+            return 'Unknown format'
+    except:
+        return 'Invalid date'
+
+
+# Test that the function works
+print("Function test:", detect_date_format("2023-01-15"))
+
+# Create a UDF and apply it to create the new DataFrame 'df'
+# Register the function as a UDF, specifying its return type
+
+detect_date_format_udf = udf(detect_date_format, StringType())
+
+# Create the new DataFrame 'df' with the format information
+
+df = orders_raw.withColumn("date_value", col("order_date")) \
+               .withColumn("format", detect_date_format_udf(col("order_date"))) \
+               .select("date_value", "format")
+
+
+# Display the results
+print("\nSample DataFrame with identified formats:")
+df.show(truncate=False)
+
+
+# Get unique formats and their counts ---
+# Get unique formats (equivalent to df['format'].unique())
+print("\nUnique date formats found:")
+df.select("format").distinct().show()
+
+
+# Count of each format (equivalent to df['format'].value_counts())
+print("\nCount of each date format:")
+df.groupBy("format").count().orderBy("count", ascending=False).show()
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
