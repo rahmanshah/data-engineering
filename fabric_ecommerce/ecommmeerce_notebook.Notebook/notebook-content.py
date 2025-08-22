@@ -317,3 +317,57 @@ orders_clean.write.format("delta").mode("overwrite").saveAsTable("silver_orders"
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# #### Payments table cleanup
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM payments
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# ##### Checking payment_date column data format
+
+# CELL ********************
+
+# Create the new DataFrame 'df' with the format information
+
+df = payments_raw.withColumn("date_value", col("payment_date")) \
+               .withColumn("format", detect_date_format_udf(col("payment_date"))) \
+               .select("date_value", "format")
+
+
+# Display the results
+print("\nSample DataFrame with identified formats:")
+df.show(truncate=False)
+
+
+# Get unique formats and their counts ---
+# Get unique formats (equivalent to df['format'].unique())
+print("\nUnique date formats found:")
+df.select("format").distinct().show()
+
+
+# Count of each format (equivalent to df['format'].value_counts())
+print("\nCount of each date format:")
+df.groupBy("format").count().orderBy("count", ascending=False).show()
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
