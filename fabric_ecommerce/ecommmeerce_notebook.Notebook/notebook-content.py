@@ -641,3 +641,91 @@ web_clean.write.format("delta").mode("overwrite").saveAsTable("silver_web_activi
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# #### Gold table - Aggregated tables for customer data 
+
+# CELL ********************
+
+cust = spark.table("silver_customer").alias("c")
+orders = spark.table("silver_orders").alias("o")
+payments = spark.table("silver_payments").alias("p")
+support = spark.table("silver_support_tickets").alias("s")
+web = spark.table("silver_web_activities").alias("w")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+customer360 = (
+    cust
+    .join(orders, "customer_id", "left")
+    .join(payments, "customer_id", "left")
+    .join(support, "customer_id", "left")
+    .join(web, "customer_id", "left")
+    .select(
+        col("c.customer_id"),
+        col("c.name"),
+        col("c.email"),
+        col("c.gender"),
+        col("c.dob"),
+        col("c.location"),
+
+        col("o.order_id"),
+        col("o.order_date"),
+        col("o.amount").alias("order_amount"),
+        col("o.status").alias("order_status"),
+
+        col("p.payment_method"),
+        col("p.payment_status"),
+        col("p.amount").alias("payment_amount"),
+
+        col("s.ticket_id"),
+        col("s.issue_type"),
+        col("s.ticket_date"),
+        col("s.resolution_status"),
+
+        col("w.page_viewed"),
+        col("w.device_type"),
+        col("w.session_time")
+    )
+)
+display(customer360.limit(10))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+customer360.write.format("delta").mode("overwrite").saveAsTable("gold_customer360")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM gold_customer360
+# MAGIC LIMIT 20
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
