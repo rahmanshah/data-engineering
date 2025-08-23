@@ -422,3 +422,114 @@ payments_clean.write.format("delta").mode("overwrite").saveAsTable("silver_payme
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# #### Support_tickets table cleanup
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM support_tickets
+# MAGIC LIMIT 5
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# Create the new DataFrame 'df' with the format information
+
+df = support_tickets_raw.withColumn("date_value", col("ticket_date")) \
+               .withColumn("format", detect_date_format_udf(col("ticket_date"))) \
+               .select("date_value", "format")
+
+
+# Display the results
+print("\nSample DataFrame with identified formats:")
+df.show(truncate=False)
+
+
+# Get unique formats and their counts ---
+# Get unique formats (equivalent to df['format'].unique())
+print("\nUnique date formats found:")
+df.select("format").distinct().show()
+
+
+# Count of each format (equivalent to df['format'].value_counts())
+print("\nCount of each date format:")
+df.groupBy("format").count().orderBy("count", ascending=False).show()
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+support = spark.table("support_tickets")
+support_clean = (
+    support
+    .withColumn("ticket_date", to_date(regexp_replace(col("ticket_date"), "/", "-")))
+    .withColumn("ticket_date",
+                when(col("ticket_date").rlike("^\d{2}/\d{2}/\d{4}$"), to_date(col("ticket_date"), "MM/dd/yyyy")) 
+                .when(col("ticket_date").rlike("^\d{2}-\d{2}-\d{4}$"), to_date(col("ticket_date"), "MM-DD-yyyy"))
+                .when(col("ticket_date").rlike("^\d{8}$"), to_date(col("ticket_date"), "yyyyMMdd"))
+                .otherwise(to_date(col("ticket_date"), "yyyy-MM-dd")))
+    .withColumn("issue_type", initcap(trim(col("issue_type"))))
+    .withColumn("resolution_status", initcap(trim(col("resolution_status"))))
+    .replace({"NA": None, "": None}, subset=["issue_type", "resolution_status"])
+    .dropDuplicates(["ticket_id"])
+    .dropna(subset=["customer_id", "ticket_date"])
+)
+display(support_clean.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(support_clean.limit(20))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+support_clean.write.format("delta").mode("overwrite").saveAsTable("silver_support_tickets")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_support_tickets
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
