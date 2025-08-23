@@ -533,3 +533,111 @@ support_clean.write.format("delta").mode("overwrite").saveAsTable("silver_suppor
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ##### Web_activities data cleanip
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM web_activities
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# Create the new DataFrame 'df' with the format information
+
+df = web_activities_raw.withColumn("date_value", col("session_time")) \
+               .withColumn("format", detect_date_format_udf(col("session_time"))) \
+               .select("date_value", "format")
+
+
+# Display the results
+print("\nSample DataFrame with identified formats:")
+df.show(truncate=False)
+
+
+# Get unique formats and their counts ---
+# Get unique formats (equivalent to df['format'].unique())
+print("\nUnique date formats found:")
+df.select("format").distinct().show()
+
+
+# Count of each format (equivalent to df['format'].value_counts())
+print("\nCount of each date format:")
+df.groupBy("format").count().orderBy("count", ascending=False).show()
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+web = spark.table("web_activities")
+web_clean = (
+    web
+    .withColumn("session_time", to_date(regexp_replace(col("session_time"), "/", "-")))
+    .withColumn("session_time",
+                when(col("session_time").rlike("^\d{2}/\d{2}/\d{4}$"), to_date(col("session_time"), "MM/dd/yyyy")) 
+                .when(col("session_time").rlike("^\d{2}-\d{2}-\d{4}$"), to_date(col("session_time"), "MM-DD-yyyy"))
+                .when(col("session_time").rlike("^\d{8}$"), to_date(col("session_time"), "yyyyMMdd"))
+                .otherwise(to_date(col("session_time"), "yyyy-MM-dd")))
+    .withColumn("page_viewed", lower(col("page_viewed")))
+    .withColumn("device_type", initcap(col("device_type")))
+    .dropDuplicates(["session_id"])
+    .dropna(subset=["customer_id", "session_time", "page_viewed"])
+)
+display(web_clean.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(web_clean)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+web_clean.write.format("delta").mode("overwrite").saveAsTable("silver_web_activities")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_web_activities
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
