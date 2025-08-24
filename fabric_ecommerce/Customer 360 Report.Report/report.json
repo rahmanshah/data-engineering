@@ -54,6 +54,14 @@
           "z": 3000.00
         },
         {
+          "config": "{\"name\":\"42458dae5142e4335829\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":441.4262905800958,\"z\":5003,\"width\":387.4741883980841,\"height\":149.59446514103246}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"gold_customer360.resolution_status\",\"active\":true}],\"Values\":[{\"queryRef\":\"Min(gold_customer360.ticket_id)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_customer360\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"resolution_status\"},\"Name\":\"gold_customer360.resolution_status\",\"NativeReferenceName\":\"resolution_status\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"ticket_id\"}},\"Function\":2},\"Name\":\"Min(gold_customer360.ticket_id)\",\"NativeReferenceName\":\"Count of ticket_id\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Ticket Status'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "height": 149.59,
+          "width": 387.47,
+          "x": 0.00,
+          "y": 441.43,
+          "z": 5003.00
+        },
+        {
           "config": "{\"name\":\"42d307224c1114996bb1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":204.77275146354444,\"z\":4000,\"width\":415.6764236295902,\"height\":236.65353911655137,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"gold_customer360.location\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(gold_customer360.order_amount)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_customer360\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"location\"},\"Name\":\"gold_customer360.location\",\"NativeReferenceName\":\"location\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_amount\"}},\"Function\":0},\"Name\":\"Sum(gold_customer360.order_amount)\",\"NativeReferenceName\":\"Sum of order_amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_amount\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 236.65,
@@ -97,6 +105,22 @@
           "x": 803.15,
           "y": 204.77,
           "z": 5001.00
+        },
+        {
+          "config": "{\"name\":\"bbc6f24ab3739d894236\",\"layouts\":[{\"id\":0,\"position\":{\"x\":803.1506120276744,\"y\":451.23576370409796,\"z\":5005,\"width\":387.4741883980841,\"height\":149.59446514103246}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(gold_customer360.order_amount)\"}],\"Category\":[{\"queryRef\":\"gold_customer360.device_type\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_customer360\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_amount\"}},\"Function\":0},\"Name\":\"Sum(gold_customer360.order_amount)\",\"NativeReferenceName\":\"Sum of order_amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"device_type\"},\"Name\":\"gold_customer360.device_type\",\"NativeReferenceName\":\"device_type\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_amount\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"labels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Orders by Device Type'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "height": 149.59,
+          "width": 387.47,
+          "x": 803.15,
+          "y": 451.24,
+          "z": 5005.00
+        },
+        {
+          "config": "{\"name\":\"bf59b0b5700b02b3c280\",\"layouts\":[{\"id\":0,\"position\":{\"x\":375.21234699308144,\"y\":451.23576370409796,\"z\":5004,\"width\":387.4741883980841,\"height\":149.59446514103246}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(gold_customer360.order_amount)\"}],\"Category\":[{\"queryRef\":\"gold_customer360.order_date\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_customer360\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_amount\"}},\"Function\":0},\"Name\":\"Sum(gold_customer360.order_amount)\",\"NativeReferenceName\":\"Sum of order_amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_date\"},\"Name\":\"gold_customer360.order_date\",\"NativeReferenceName\":\"order_date\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"order_date\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"labels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Order Trend'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "height": 149.59,
+          "width": 387.47,
+          "x": 375.21,
+          "y": 451.24,
+          "z": 5004.00
         }
       ],
       "width": 1280.00
