@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Customer 360 Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "33b2aa8c-cb85-963a-4694-78c9cc4e51cf"
+  }
+}
