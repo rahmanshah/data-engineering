@@ -51,6 +51,48 @@
         },
         "name": "Get Metadata1",
         "dependsOn": []
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": "select FileName from FileTracker;",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "typeProperties": {
+              "schema": "dbo",
+              "table": "FileTracker"
+            },
+            "schema": [],
+            "linkedService": {
+              "name": "migration_dedicated",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "c24b232d-c9a7-4fc9-bec5-81e351a80601",
+                  "endpoint": "fqxp3yc7jxjuzgg4fvuysuja24-lryuwqqlfhyuzphatojokr3txq.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "424b715c-290b-4cf1-bce0-9b92e54773bc"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Lookup1",
+        "dependsOn": []
       }
     ]
   }
