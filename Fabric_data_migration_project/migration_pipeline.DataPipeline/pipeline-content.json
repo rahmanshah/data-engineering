@@ -93,6 +93,34 @@
         },
         "name": "Lookup1",
         "dependsOn": []
+      },
+      {
+        "type": "Filter",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Get Metadata1').output.childItems",
+            "type": "Expression"
+          },
+          "condition": {
+            "value": "@not(contains(string(activity('Lookup1').output.value), item().name))\n\n",
+            "type": "Expression"
+          }
+        },
+        "name": "Filter1",
+        "dependsOn": [
+          {
+            "activity": "Get Metadata1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          },
+          {
+            "activity": "Lookup1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ]
   }
