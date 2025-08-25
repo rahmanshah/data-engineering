@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Warehouse",
+    "displayName": "migration_dedicated"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "51a80601-81e3-bec5-4fc9-c9a7c24b232d"
+  }
+}
