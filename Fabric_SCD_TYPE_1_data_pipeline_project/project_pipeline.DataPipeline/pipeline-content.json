@@ -104,8 +104,10 @@
                 },
                 "sink": {
                   "type": "DataWarehouseSink",
+                  "preCopyScript": "truncate table dbo.stg_customer",
                   "allowCopyCommand": true,
                   "copyCommandSettings": {},
+                  "disableMetricsCollection": false,
                   "datasetSettings": {
                     "type": "DataWarehouseTable",
                     "typeProperties": {
