@@ -18,12 +18,11 @@
         "columns": [
           {
             "name": "customer_id",
-            "dataType": "int64",
+            "dataType": "string",
             "sourceColumn": "customer_id",
-            "formatString": "0",
-            "sourceProviderType": "int",
+            "sourceProviderType": "varchar",
             "sourceLineageTag": "customer_id",
-            "summarizeBy": "sum",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -113,12 +112,11 @@
         "columns": [
           {
             "name": "customer_id",
-            "dataType": "int64",
+            "dataType": "string",
             "sourceColumn": "customer_id",
-            "formatString": "0",
-            "sourceProviderType": "int",
+            "sourceProviderType": "varchar",
             "sourceLineageTag": "customer_id",
-            "summarizeBy": "sum",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
