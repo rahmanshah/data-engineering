@@ -169,6 +169,49 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "Script",
+              "typeProperties": {
+                "scripts": [
+                  {
+                    "text": {
+                      "value": "UPDATE stg_customer\nSET file_date = '@{variables('file_date')}'\nWHERE file_date IS NULL;\n",
+                      "type": "Expression"
+                    },
+                    "type": "Query"
+                  }
+                ],
+                "scriptBlockExecutionTimeout": "02:00:00"
+              },
+              "linkedService": {
+                "name": "customer",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "0aacbd77-2f5e-4c35-88fb-7671d3394d1d",
+                    "endpoint": "fqxp3yc7jxjuzgg4fvuysuja24-tq3ue7mhb6qenjeesdhf55hboq.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "7d42379c-0f87-46a0-a484-90ce5ef4e174"
+                  },
+                  "annotations": []
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Script1",
+              "dependsOn": [
+                {
+                  "activity": "Set variable1",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
             }
           ]
         },
