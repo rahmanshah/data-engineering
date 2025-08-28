@@ -149,6 +149,26 @@
               },
               "name": "Copy data1",
               "dependsOn": []
+            },
+            {
+              "type": "SetVariable",
+              "typeProperties": {
+                "variableName": "file_date",
+                "value": "@formatDateTime(substring(item().name, 9, 10), 'yyyy-MM-dd')"
+              },
+              "policy": {
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Set variable1",
+              "dependsOn": [
+                {
+                  "activity": "Copy data1",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -162,6 +182,11 @@
           }
         ]
       }
-    ]
+    ],
+    "variables": {
+      "file_date": {
+        "type": "String"
+      }
+    }
   }
 }
