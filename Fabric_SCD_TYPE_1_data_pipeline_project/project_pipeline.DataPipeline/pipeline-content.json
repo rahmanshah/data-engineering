@@ -36,6 +36,7 @@
           ],
           "storeSettings": {
             "type": "LakehouseReadSettings",
+            "recursive": true,
             "enablePartitionDiscovery": false
           },
           "formatSettings": {
@@ -154,7 +155,10 @@
               "type": "SetVariable",
               "typeProperties": {
                 "variableName": "file_date",
-                "value": "@formatDateTime(substring(item().name, 9, 10), 'yyyy-MM-dd')"
+                "value": {
+                  "value": "@formatDateTime(substring(item().name, 9, 10), 'yyyy-MM-dd')",
+                  "type": "Expression"
+                }
               },
               "policy": {
                 "secureInput": false,
@@ -219,6 +223,40 @@
         "dependsOn": [
           {
             "activity": "Get Metadata1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "SqlServerStoredProcedure",
+        "typeProperties": {
+          "storedProcedureName": "[dbo].[sp_upsert_dim_customer_scd1]"
+        },
+        "linkedService": {
+          "name": "customer",
+          "properties": {
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "artifactId": "0aacbd77-2f5e-4c35-88fb-7671d3394d1d",
+              "endpoint": "fqxp3yc7jxjuzgg4fvuysuja24-tq3ue7mhb6qenjeesdhf55hboq.datawarehouse.fabric.microsoft.com",
+              "workspaceId": "7d42379c-0f87-46a0-a484-90ce5ef4e174"
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Stored procedure1",
+        "dependsOn": [
+          {
+            "activity": "ForEach1",
             "dependencyConditions": [
               "Succeeded"
             ]
