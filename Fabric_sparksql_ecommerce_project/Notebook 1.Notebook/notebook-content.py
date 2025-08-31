@@ -20,11 +20,66 @@
 # META   }
 # META }
 
+# MARKDOWN ********************
+
+# ##
+
+# MARKDOWN ********************
+
+# ## Bronze Layer dataframe 
+
 # CELL ********************
 
 # Welcome to your new notebook
 # Type here in the cell editor to add code!
+customers_new = spark.read.parquet("abfss://sparksql_ecommerce@onelake.dfs.fabric.microsoft.com/rawDataLakehouse.Lakehouse/Files/Bronze/customers.parquet")
+orders_new = spark.read.parquet("abfss://sparksql_ecommerce@onelake.dfs.fabric.microsoft.com/rawDataLakehouse.Lakehouse/Files/Bronze/orders.parquet")
+order_items_new = spark.read.parquet("abfss://sparksql_ecommerce@onelake.dfs.fabric.microsoft.com/rawDataLakehouse.Lakehouse/Files/Bronze/order_items.parquet")
+products_new = spark.read.parquet("abfss://sparksql_ecommerce@onelake.dfs.fabric.microsoft.com/rawDataLakehouse.Lakehouse/Files/Bronze/products.parquet")
 
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(customers_new.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(orders_new.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(order_items_new.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(products_new.limit(5))
 
 # METADATA ********************
 
