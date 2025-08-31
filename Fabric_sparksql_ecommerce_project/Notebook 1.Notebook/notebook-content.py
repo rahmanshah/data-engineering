@@ -87,3 +87,21 @@ display(products_new.limit(5))
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ### Bronze layer table from dataframe
+
+# CELL ********************
+
+customers_new.write.format("delta").mode("overwrite").saveAsTable("bronze_customers")
+orders_new.write.format("delta").mode("overwrite").saveAsTable("bronze_orders")
+order_items_new.write.format("delta").mode("overwrite").saveAsTable("bronze_order_items")
+products_new.write.format("delta").mode("overwrite").saveAsTable("bronze_products")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
