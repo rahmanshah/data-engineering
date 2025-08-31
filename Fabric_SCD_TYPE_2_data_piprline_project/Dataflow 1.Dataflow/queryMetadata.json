@@ -7,12 +7,21 @@
   "queriesMetadata": {
     "customer_branch1_2025-07-15 csv": {
       "queryId": "10dd38cf-af66-4c48-8d14-94a49ea6701d",
-      "queryName": "customer_branch1_2025-07-15 csv",
-      "loadEnabled": false
+      "queryName": "customer_branch1_2025-07-15 csv"
+    },
+    "customer_branch1_2025-07-16 csv": {
+      "queryId": "69332ecb-8a19-4e76-8b9c-8140377c0d83",
+      "queryName": "customer_branch1_2025-07-16 csv"
     },
     "customer_branch1_2025-07-15 csv_DataDestination": {
-      "queryId": "ca774540-ca98-45cd-928c-3c07ea5b5433",
+      "queryId": "18f99186-d4c3-47ef-889b-e9373d5187a9",
       "queryName": "customer_branch1_2025-07-15 csv_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "customer_branch1_2025-07-16 csv_DataDestination": {
+      "queryId": "764e42e6-f173-4ff7-8beb-d2406d1be0ab",
+      "queryName": "customer_branch1_2025-07-16 csv_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     }
@@ -22,6 +31,11 @@
       "path": "Lakehouse",
       "kind": "Lakehouse",
       "connectionId": "{\"ClusterId\":\"ce7c7c69-8ed8-49e2-bf58-560df7940e0b\",\"DatasourceId\":\"a0a422a8-c88b-4be4-ad10-a32479cf4399\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"ce7c7c69-8ed8-49e2-bf58-560df7940e0b\",\"DatasourceId\":\"e56e2ccf-f930-4d98-9c01-5078425b904e\"}"
     }
   ]
 }

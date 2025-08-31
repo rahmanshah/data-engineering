@@ -1,7 +1,6 @@
-CREATE   PROCEDURE sp_upsert_customer_scd2
+CREATE   PROCEDURE sp_upsert_customer_scd2_1
 AS
 BEGIN
-    SET NOCOUNT ON;
     -- Step 1: Deduplicate - pick latest record for each customer_id
     WITH latest_customer AS (
         SELECT *
@@ -12,7 +11,6 @@ BEGIN
         ) ranked
         WHERE rn = 1
     )
-
     -- Step 2: Update existing record if values have changed
     UPDATE dim_customer
     SET end_date = lc.last_updated,
@@ -26,7 +24,7 @@ BEGIN
          dc.address <> lc.address OR
          dc.phone <> lc.phone
      );
-
+    
     -- Step 3: Insert new version or new customers
     INSERT INTO dim_customer (
         customer_id, name, address, phone,
@@ -41,6 +39,5 @@ BEGIN
        OR dc.name <> lc.name
        OR dc.address <> lc.address
        OR dc.phone <> lc.phone;
-
 
 END;

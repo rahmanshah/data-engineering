@@ -36,6 +36,7 @@
           ],
           "storeSettings": {
             "type": "LakehouseReadSettings",
+            "recursive": true,
             "enablePartitionDiscovery": false
           },
           "formatSettings": {
@@ -50,7 +51,14 @@
           "secureOutput": false
         },
         "name": "Get Metadata1",
-        "dependsOn": []
+        "dependsOn": [
+          {
+            "activity": "Script1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       },
       {
         "type": "ForEach",
@@ -65,11 +73,30 @@
               "type": "Copy",
               "typeProperties": {
                 "source": {
-                  "type": "LakehouseTableSource",
+                  "type": "DelimitedTextSource",
+                  "formatSettings": {
+                    "type": "DelimitedTextReadSettings"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseReadSettings",
+                    "recursive": true,
+                    "enablePartitionDiscovery": false
+                  },
                   "datasetSettings": {
-                    "type": "LakehouseTable",
+                    "type": "DelimitedText",
                     "typeProperties": {
-                      "table": "customer_branch1_2025-07-15 csv"
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": "source",
+                        "fileName": {
+                          "value": "@item().name",
+                          "type": "Expression"
+                        }
+                      },
+                      "columnDelimiter": ",",
+                      "quoteChar": "\"",
+                      "escapeChar": "\\",
+                      "firstRowAsHeader": true
                     },
                     "schema": [],
                     "linkedService": {
@@ -77,9 +104,9 @@
                       "properties": {
                         "type": "Lakehouse",
                         "typeProperties": {
-                          "artifactId": "ccb62697-6e83-adef-4fe2-80e14cf8a5c4",
-                          "workspaceId": "00000000-0000-0000-0000-000000000000",
-                          "rootFolder": "Tables"
+                          "artifactId": "4cf8a5c4-80e1-4fe2-adef-6e83ccb62697",
+                          "workspaceId": "bd866274-7f58-4cd8-9357-b54edeb14d40",
+                          "rootFolder": "Files"
                         },
                         "annotations": []
                       }
@@ -89,7 +116,6 @@
                 },
                 "sink": {
                   "type": "DataWarehouseSink",
-                  "preCopyScript": "truncate table dbo.stg_customer",
                   "allowCopyCommand": true,
                   "copyCommandSettings": {},
                   "disableMetricsCollection": false,
@@ -117,6 +143,68 @@
                 },
                 "translator": {
                   "type": "TabularTranslator",
+                  "mappings": [
+                    {
+                      "source": {
+                        "name": "customer_id",
+                        "type": "String",
+                        "physicalType": "String"
+                      },
+                      "sink": {
+                        "name": "customer_id",
+                        "physicalType": "varchar",
+                        "length": "10"
+                      }
+                    },
+                    {
+                      "source": {
+                        "name": "name",
+                        "type": "String",
+                        "physicalType": "String"
+                      },
+                      "sink": {
+                        "name": "name",
+                        "physicalType": "varchar",
+                        "length": "100"
+                      }
+                    },
+                    {
+                      "source": {
+                        "name": "address",
+                        "type": "String",
+                        "physicalType": "String"
+                      },
+                      "sink": {
+                        "name": "address",
+                        "physicalType": "varchar",
+                        "length": "200"
+                      }
+                    },
+                    {
+                      "source": {
+                        "name": "phone",
+                        "type": "String",
+                        "physicalType": "String"
+                      },
+                      "sink": {
+                        "name": "phone",
+                        "physicalType": "varchar",
+                        "length": "20"
+                      }
+                    },
+                    {
+                      "source": {
+                        "name": "last_updated",
+                        "type": "String",
+                        "physicalType": "String"
+                      },
+                      "sink": {
+                        "name": "last_updated",
+                        "physicalType": "datetime2",
+                        "precision": 0
+                      }
+                    }
+                  ],
                   "typeConversion": true,
                   "typeConversionSettings": {
                     "allowDataTruncation": true,
@@ -133,24 +221,46 @@
                 "secureOutput": false
               },
               "name": "Copy data1",
+              "state": "Inactive",
+              "onInactiveMarkAs": "Succeeded",
               "dependsOn": []
+            },
+            {
+              "type": "RefreshDataflow",
+              "typeProperties": {
+                "dataflowId": "483baa1c-85cf-4ef8-9a2f-c82890af4a80",
+                "workspaceId": "bd866274-7f58-4cd8-9357-b54edeb14d40",
+                "notifyOption": "NoNotification",
+                "dataflowType": "DataflowFabric"
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Dataflow1",
+              "dependsOn": [
+                {
+                  "activity": "Copy data1",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
             }
           ]
         },
         "name": "ForEach1",
-        "dependsOn": [
-          {
-            "activity": "Get Metadata1",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": []
       },
       {
         "type": "SqlServerStoredProcedure",
         "typeProperties": {
-          "storedProcedureName": "[dbo].[sp_upsert_customer_scd2]"
+          "storedProcedureName": "[dbo].[sp_upsert_customer_scd2_1]"
         },
         "linkedService": {
           "name": "customer",
@@ -174,7 +284,68 @@
         "name": "Stored procedure1",
         "dependsOn": [
           {
-            "activity": "ForEach1",
+            "activity": "Dataflow2",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Script",
+        "typeProperties": {
+          "scripts": [
+            {
+              "text": {
+                "value": "truncate table dbo.stg_customer",
+                "type": "Expression"
+              },
+              "type": "Query"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        },
+        "linkedService": {
+          "name": "customer",
+          "properties": {
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "artifactId": "dea745d3-f7de-4c92-926a-157df71fd5d0",
+              "endpoint": "fqxp3yc7jxjuzgg4fvuysuja24-orrinpkyp7meze2xwvhn5mknia.datawarehouse.fabric.microsoft.com",
+              "workspaceId": "bd866274-7f58-4cd8-9357-b54edeb14d40"
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Script1",
+        "dependsOn": []
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "90af4a80-c828-9a2f-4ef8-85cf483baa1c",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Dataflow2",
+        "dependsOn": [
+          {
+            "activity": "Get Metadata1",
             "dependencyConditions": [
               "Succeeded"
             ]
