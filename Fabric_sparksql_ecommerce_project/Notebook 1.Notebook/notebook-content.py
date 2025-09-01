@@ -319,3 +319,49 @@ products_new.write.format("delta").mode("overwrite").saveAsTable("bronze_product
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM bronze_order_items
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC CREATE OR REPLACE TABLE silver_order_items AS
+# MAGIC SELECT
+# MAGIC   CAST(OrderID AS STRING) AS OrderID,
+# MAGIC   CAST(ProductID AS STRING) AS ProductID,
+# MAGIC   CAST(Quantity AS INT) AS Quantity
+# MAGIC FROM bronze_order_items
+# MAGIC WHERE Quantity IS NOT NULL AND Quantity > 0;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_order_items
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
