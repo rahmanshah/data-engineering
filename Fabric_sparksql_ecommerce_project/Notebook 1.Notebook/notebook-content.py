@@ -162,3 +162,59 @@ products_new.write.format("delta").mode("overwrite").saveAsTable("bronze_product
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ### Silver Layer tables
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM bronze_orders
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC CREATE OR REPLACE TABLE silver_orders AS
+# MAGIC SELECT
+# MAGIC   CAST(OrderID AS STRING) AS OrderID,
+# MAGIC   CAST(CustomerID AS STRING) AS CustomerID,
+# MAGIC   TO_DATE(REPLACE(OrderDate, '/', '-')) AS OrderDate,
+# MAGIC   TO_DATE(REPLACE(ShippedDate, '/', '-')) AS ShippedDate,
+# MAGIC   TO_DATE(REPLACE(DeliveredDate, '/', '-')) AS DeliveredDate,
+# MAGIC   ROUND(CAST(Price AS DOUBLE), 2) AS Price,
+# MAGIC   INITCAP(TRIM(OrderChannel)) AS OrderChannel,
+# MAGIC   INITCAP(TRIM(Region)) AS Region,
+# MAGIC   TRIM(ReferredBy) AS ReferredBy
+# MAGIC FROM bronze_orders
+# MAGIC WHERE OrderID IS NOT NULL;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_orders
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
