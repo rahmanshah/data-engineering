@@ -365,3 +365,101 @@ products_new.write.format("delta").mode("overwrite").saveAsTable("bronze_product
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# #### Gold Layers table
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC CREATE OR REPLACE TEMP VIEW orders_enriched AS
+# MAGIC SELECT
+# MAGIC   o.OrderID,
+# MAGIC   o.CustomerID,
+# MAGIC   o.OrderDate,
+# MAGIC   o.ShippedDate,
+# MAGIC   o.DeliveredDate,
+# MAGIC   o.Price,
+# MAGIC   o.Region,
+# MAGIC   o.OrderChannel,
+# MAGIC   o.ReferredBy,
+# MAGIC   c.CustomerName,
+# MAGIC   c.IsPremiumCustomer,
+# MAGIC   c.SignupDate,
+# MAGIC   i.ProductID,
+# MAGIC   i.Quantity,
+# MAGIC   p.Category,
+# MAGIC   p.Carrier,
+# MAGIC   p.ShipmentCost,
+# MAGIC   p.IsDiscounted,
+# MAGIC   DATEDIFF(o.DeliveredDate, o.ShippedDate) AS DeliveryDelay
+# MAGIC FROM silver_orders o
+# MAGIC LEFT JOIN silver_customers c ON o.CustomerID = c.CustomerID
+# MAGIC LEFT JOIN silver_order_items i ON o.OrderID = i.OrderID
+# MAGIC LEFT JOIN silver_products p ON i.ProductID = p.ProductID;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM orders_enriched
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC CREATE OR REPLACE TABLE gold_order_kpis AS
+# MAGIC SELECT
+# MAGIC   CustomerID,
+# MAGIC   CustomerName,
+# MAGIC   IsPremiumCustomer,
+# MAGIC   Region,
+# MAGIC   OrderChannel,
+# MAGIC   COUNT(DISTINCT OrderID) AS TotalOrders,
+# MAGIC   SUM(Quantity) AS TotalQuantity,
+# MAGIC   SUM(Price) AS TotalRevenue,
+# MAGIC   ROUND(AVG(DeliveryDelay), 1) AS AvgDeliveryDelayDays,
+# MAGIC   COUNT(DISTINCT CASE WHEN DeliveryDelay > 3 THEN OrderID END) AS DelayedOrders,
+# MAGIC   ROUND(SUM(ShipmentCost), 2) AS TotalShipmentCost,
+# MAGIC   ROUND(SUM(CASE WHEN IsDiscounted = 'Yes' THEN Price ELSE 0 END), 2) AS RevenueFromDiscounted,
+# MAGIC   MAX(DeliveryDelay) AS MaxDeliveryDelay
+# MAGIC FROM orders_enriched
+# MAGIC GROUP BY 
+# MAGIC   CustomerID, CustomerName, IsPremiumCustomer, Region, OrderChannel;
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM gold_order_kpis
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
