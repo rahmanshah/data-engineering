@@ -268,3 +268,54 @@ products_new.write.format("delta").mode("overwrite").saveAsTable("bronze_product
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM bronze_products
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC CREATE OR REPLACE TABLE silver_products AS
+# MAGIC SELECT
+# MAGIC   CAST(ProductID AS STRING) AS ProductID,
+# MAGIC   INITCAP(TRIM(Category)) AS Category,
+# MAGIC   INITCAP(TRIM(Carrier)) AS Carrier,
+# MAGIC   ROUND(CAST(ShipmentCost AS DOUBLE), 2) AS ShipmentCost,
+# MAGIC   CASE 
+# MAGIC     WHEN LOWER(IsDiscounted) IN ('yes', 'y') THEN 'Yes'
+# MAGIC     ELSE 'No'
+# MAGIC   END AS IsDiscounted
+# MAGIC FROM bronze_products
+# MAGIC WHERE ProductID IS NOT NULL;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_products
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
