@@ -218,3 +218,53 @@ products_new.write.format("delta").mode("overwrite").saveAsTable("bronze_product
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM bronze_customers
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC CREATE OR REPLACE TABLE silver_customers AS
+# MAGIC SELECT
+# MAGIC   CAST(CustomerID AS STRING) AS CustomerID,
+# MAGIC   INITCAP(TRIM(CustomerName)) AS CustomerName,
+# MAGIC   CASE 
+# MAGIC     WHEN LOWER(IsPremiumCustomer) IN ('yes', 'y') THEN 'Yes'
+# MAGIC     ELSE 'No'
+# MAGIC   END AS IsPremiumCustomer,
+# MAGIC   TO_DATE(SignupDate) AS SignupDate
+# MAGIC FROM bronze_customers
+# MAGIC WHERE CustomerID IS NOT NULL;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_customers
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
