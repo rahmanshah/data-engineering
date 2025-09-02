@@ -1,0 +1,155 @@
+table gold_order_kpis
+	lineageTag: c377f7ff-42f4-4a98-8f0f-d3f410de51ca
+	sourceLineageTag: [dbo].[gold_order_kpis]
+
+	column CustomerID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 575dae50-6b6b-4e16-b465-3a3c5d88636f
+		sourceLineageTag: CustomerID
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4a5bb59e-7884-4822-a37d-4dcd93f4e695
+		sourceLineageTag: CustomerName
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsPremiumCustomer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e4272365-2af2-4b44-807c-1cc6dd26524b
+		sourceLineageTag: IsPremiumCustomer
+		summarizeBy: none
+		sourceColumn: IsPremiumCustomer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fce7d75f-bf56-479b-88aa-445556fdf0f1
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderChannel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 89649fc2-5829-4338-a0a8-f13e5bc87615
+		sourceLineageTag: OrderChannel
+		summarizeBy: none
+		sourceColumn: OrderChannel
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalOrders
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 7bcddec5-493d-426f-9a7a-8bf30d1519b3
+		sourceLineageTag: TotalOrders
+		summarizeBy: sum
+		sourceColumn: TotalOrders
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalQuantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 15efcd2e-5019-4721-b4fc-edf6f826483c
+		sourceLineageTag: TotalQuantity
+		summarizeBy: sum
+		sourceColumn: TotalQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalRevenue
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 334416de-1de1-4ece-a3f0-78d1032ab769
+		sourceLineageTag: TotalRevenue
+		summarizeBy: sum
+		sourceColumn: TotalRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvgDeliveryDelayDays
+		dataType: double
+		sourceProviderType: float
+		lineageTag: ccf59cea-4678-4043-bf67-ea4d642e9984
+		sourceLineageTag: AvgDeliveryDelayDays
+		summarizeBy: sum
+		sourceColumn: AvgDeliveryDelayDays
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DelayedOrders
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 394fb43f-b6e8-4b7f-b733-b1ec1defe595
+		sourceLineageTag: DelayedOrders
+		summarizeBy: sum
+		sourceColumn: DelayedOrders
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalShipmentCost
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6fb507a1-be1d-4b1d-ba64-ecefe4b8a2c1
+		sourceLineageTag: TotalShipmentCost
+		summarizeBy: sum
+		sourceColumn: TotalShipmentCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RevenueFromDiscounted
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 955860c7-54a9-496f-87d9-0959d3e35244
+		sourceLineageTag: RevenueFromDiscounted
+		summarizeBy: sum
+		sourceColumn: RevenueFromDiscounted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MaxDeliveryDelay
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7bd36f85-1bad-413b-9d17-2aea4e597503
+		sourceLineageTag: MaxDeliveryDelay
+		summarizeBy: sum
+		sourceColumn: MaxDeliveryDelay
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_order_kpis = entity
+		mode: directLake
+		source
+			entityName: gold_order_kpis
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

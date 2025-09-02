@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "gold_order_kpis_semantic"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c93fcfcd-f3c5-874d-4cca-67d2ebb553c1"
+  }
+}
