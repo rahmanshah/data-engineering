@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "order_analysis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e0a0c4d2-6a56-acaf-4131-6ad79aec2bd2"
+  }
+}
