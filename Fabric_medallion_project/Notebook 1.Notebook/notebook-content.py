@@ -479,6 +479,29 @@ inventory = spark.table("silver_inventory_data").alias("i")
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+# STEP 2: Join Orders with Returns (LEFT)
+order_return = orders.join(
+    returns,
+    on=col("o.OrderID") == col("r.OrderID"),
+    how="left"
+)
+
+# STEP 3: Join with Inventory (LEFT)
+enriched = order_return.join(
+    inventory,
+    on=col("o.ProductName") == col("i.ProductName"),
+    how="left"
+)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
