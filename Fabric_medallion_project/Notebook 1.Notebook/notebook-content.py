@@ -571,6 +571,31 @@ display(df_kpi.limit(5))
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+df_kpi.write.format("delta").mode("overwrite").saveAsTable("gold_product_month_kpi")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM gold_product_month_kpi
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
