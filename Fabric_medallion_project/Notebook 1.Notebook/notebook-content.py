@@ -535,6 +535,42 @@ display(df_enriched.limit(5))
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+# STEP 5: Aggregate KPIs by Product and Month
+df_kpi = (
+    df_enriched.groupBy("ProductName")
+    .agg(
+        count("OrderID").alias("Total_Orders"),
+        countDistinct("CustomerID").alias("Unique_Customers"),
+        count("ReturnID").alias("Total_Returns"),
+        round((count("ReturnID") / count("OrderID")) * 100, 2).alias("Return_Rate_%"),
+        round(sum("OrderAmount"), 2).alias("Total_Revenue"),
+        round(avg("OrderAmount"), 2).alias("Avg_Order_Value"),
+        sum("Stock").alias("Total_Stock"),
+        round(avg("CostPrice"), 2).alias("Avg_Cost"),
+        round(sum("OrderAmount") - (sum("Stock") * avg("CostPrice")), 2).alias("Net_Profit")
+    )
+)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+display(df_kpi.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
