@@ -247,6 +247,31 @@ display(df_orders.limit(5))
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+df_orders.write.format("delta").mode("overwrite").saveAsTable("silver_orders_data")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_orders_data
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
