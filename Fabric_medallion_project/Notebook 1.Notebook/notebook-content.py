@@ -461,4 +461,24 @@ df_returns.write.format("delta").mode("overwrite").saveAsTable("silver_returns_d
 
 # MARKDOWN ********************
 
+# ### Gold Layer Aggregate
+
+# CELL ********************
+
+from pyspark.sql.functions import *
+
+# STEP 1: Load cleaned Silver tables with aliases
+orders = spark.table("silver_orders_data").alias("o")
+returns = spark.table("silver_returns_data").alias("r")
+inventory = spark.table("silver_inventory_data").alias("i")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
 # ##### 
