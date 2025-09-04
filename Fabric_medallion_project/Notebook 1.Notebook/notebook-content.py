@@ -346,6 +346,31 @@ display(df_inventory.limit(5))
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+df_inventory.write.format("delta").mode("overwrite").saveAsTable("silver_inventory_data")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_inventory_data
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
