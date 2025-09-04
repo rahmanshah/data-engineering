@@ -78,6 +78,30 @@ display(returns_df.limit(5))
 
 # MARKDOWN ********************
 
+# ##### Handled first row of returns_df
+
+# CELL ********************
+
+# Extract first row as header
+first_row = returns_df.first()
+columns = [str(item).strip() for item in first_row]
+
+# Remove the first row (header row now part of data)
+returns_df = returns_df.rdd.zipWithIndex().filter(lambda x: x[1] > 0).map(lambda x: x[0]).toDF(columns)
+
+# Show cleaned data
+display(returns_df.limit(5))
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
 # #### Bronze layer table created from dataframe
 
 # CELL ********************
@@ -134,3 +158,15 @@ returns_df.write.format("delta").mode("overwrite").saveAsTable("bronze_returns_d
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ### Silver Layer
+
+# MARKDOWN ********************
+
+# ##### Cleaning Order table data
+
+# MARKDOWN ********************
+
+# ##### 
