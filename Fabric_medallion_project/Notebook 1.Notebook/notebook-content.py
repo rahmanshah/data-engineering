@@ -165,7 +165,7 @@ returns_df.write.format("delta").mode("overwrite").saveAsTable("bronze_returns_d
 
 # MARKDOWN ********************
 
-# ##### Cleaning Order table data
+# ##### Cleaning Orders data
 
 # CELL ********************
 
@@ -269,6 +269,80 @@ df_orders.write.format("delta").mode("overwrite").saveAsTable("silver_orders_dat
 
 # META {
 # META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# ##### Cleaning Inverntory data
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM bronze_inventory_data
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+df_inventory = (
+    inventory_df
+    .withColumnRenamed("productName", "ProductName")
+    .withColumnRenamed("cost_price", "CostPrice")
+    .withColumnRenamed("last_stocked", "LastStocked")
+    
+    # 2. Clean stock column: convert to integer
+    .withColumn("Stock", 
+        when(col("stock").rlike("^[0-9]+$"), col("stock").cast(IntegerType()))  # Numeric values
+        .when(col("stock").isNull() | (col("stock") == ""), lit(None))  # Null or blank
+        .otherwise(
+            when(col("stock").rlike(".*twenty five.*"), lit(25))
+            .when(col("stock").rlike(".*twenty.*"), lit(20))
+            .when(col("stock").rlike(".*eighteen.*"), lit(18))
+            .when(col("stock").rlike(".*fifteen.*"), lit(15))
+            .when(col("stock").rlike(".*twelve.*"), lit(12))
+            .otherwise(lit(None))
+        ).cast(IntegerType())
+    )
+    
+    # 3. Clean LastStocked: normalize multiple date formats to yyyy-MM-dd
+    .withColumn("LastStocked", to_date(
+        regexp_replace("LastStocked", "[./]", "-"), "yyyy-MM-dd"
+    ))
+    
+    # 4. Clean CostPrice: extract numeric value and convert to float
+    .withColumn("CostPrice", 
+        regexp_extract(col("CostPrice"), r"(\d+\.?\d*)", 1).cast(DoubleType())
+    )
+
+    # 5. Clean Warehouse: remove special characters, trim, capitalize first letter
+    .withColumn("Warehouse", 
+        initcap(trim(regexp_replace(col("warehouse"), r"[^a-zA-Z0-9\s]", " ")))
+    )
+    
+    # 6. Standardize Available: convert to boolean
+    .withColumn("Available", 
+        when(lower(col("available")).isin("yes", "y", "true"), lit(True))
+        .when(lower(col("available")).isin("no", "n", "false"), lit(False))
+        .otherwise(None)
+    )
+    
+)
+
+# Display the cleaned data
+display(df_inventory.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
 
