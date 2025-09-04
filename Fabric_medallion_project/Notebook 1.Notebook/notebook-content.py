@@ -502,6 +502,39 @@ enriched = order_return.join(
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+display(enriched.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# STEP 4: Select explicit columns to avoid ambiguity
+df_enriched = enriched.select(
+    col("o.ProductName").alias("ProductName"),
+    col("o.OrderID").alias("OrderID"),
+    col("o.CustomerID").alias("CustomerID"),
+    col("o.OrderAmount").alias("OrderAmount"),
+    col("r.ReturnID").alias("ReturnID"),
+    col("i.Stock").alias("Stock"),
+    col("i.CostPrice").alias("CostPrice")
+)
+
+display(df_enriched.limit(5))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
