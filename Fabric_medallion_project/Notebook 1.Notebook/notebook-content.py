@@ -434,6 +434,31 @@ display(df_returns.limit(5))
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+df_returns.write.format("delta").mode("overwrite").saveAsTable("silver_returns_data")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT *
+# MAGIC FROM silver_returns_data
+# MAGIC LIMIT 5;
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ##### 
