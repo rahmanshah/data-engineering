@@ -36,13 +36,49 @@
           "z": 0.00
         },
         {
-          "config": "{\"name\":\"70b2aff0a79d997fb3b9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":93.2868629007212,\"z\":1,\"width\":227.56340798509265,\"height\":149.82435556782497,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(gold_product_month_kpi.Total_Orders)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_product_month_kpi\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Orders\"}},\"Function\":0},\"Name\":\"Sum(gold_product_month_kpi.Total_Orders)\",\"NativeReferenceName\":\"Sum of Total_Orders\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Orders\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "config": "{\"name\":\"19f6fd4d473cd8671126\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1026.1554919079333,\"y\":93.2868629007212,\"z\":1004,\"width\":254.41871700196694,\"height\":149.82435556782497,\"tabOrder\":1004}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(gold_product_month_kpi.Avg_Cost)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_product_month_kpi\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Avg_Cost\"}},\"Function\":0},\"Name\":\"Sum(gold_product_month_kpi.Avg_Cost)\",\"NativeReferenceName\":\"Sum of Avg_Cost\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Avg_Cost\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
           "filters": "[]",
           "height": 149.82,
-          "width": 227.56,
+          "width": 254.42,
+          "x": 1026.16,
+          "y": 93.29,
+          "z": 1004.00
+        },
+        {
+          "config": "{\"name\":\"2e9d7572e373ae288536\",\"layouts\":[{\"id\":0,\"position\":{\"x\":767.4964629559336,\"y\":93.2868629007212,\"z\":1003,\"width\":258.65902895199974,\"height\":149.82435556782497,\"tabOrder\":1003}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(gold_product_month_kpi.Total_Stock)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_product_month_kpi\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Stock\"}},\"Function\":0},\"Name\":\"Sum(gold_product_month_kpi.Total_Stock)\",\"NativeReferenceName\":\"Sum of Total_Stock\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Stock\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.82,
+          "width": 258.66,
+          "x": 767.50,
+          "y": 93.29,
+          "z": 1003.00
+        },
+        {
+          "config": "{\"name\":\"70b2aff0a79d997fb3b9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":93.2868629007212,\"z\":1000,\"width\":261.4859035853549,\"height\":149.82435556782497,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(gold_product_month_kpi.Total_Orders)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_product_month_kpi\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Orders\"}},\"Function\":0},\"Name\":\"Sum(gold_product_month_kpi.Total_Orders)\",\"NativeReferenceName\":\"Sum of Total_Orders\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Orders\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.82,
+          "width": 261.49,
           "x": 0.00,
           "y": 93.29,
-          "z": 1.00
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"78c52c5b01ddebceb935\",\"layouts\":[{\"id\":0,\"position\":{\"x\":513.0777459539667,\"y\":93.2868629007212,\"z\":1002,\"width\":254.41871700196694,\"height\":149.82435556782497,\"tabOrder\":1002}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(gold_product_month_kpi.Total_Revenue)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_product_month_kpi\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Revenue\"}},\"Function\":0},\"Name\":\"Sum(gold_product_month_kpi.Total_Revenue)\",\"NativeReferenceName\":\"Sum of Total_Revenue\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Revenue\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.82,
+          "width": 254.42,
+          "x": 513.08,
+          "y": 93.29,
+          "z": 1002.00
+        },
+        {
+          "config": "{\"name\":\"7c2cb62d6c31482b4d3f\",\"layouts\":[{\"id\":0,\"position\":{\"x\":261.4859035853549,\"y\":93.2868629007212,\"z\":1001,\"width\":251.59184236861174,\"height\":149.82435556782497,\"tabOrder\":1001}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(gold_product_month_kpi.Total_Returns)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_product_month_kpi\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Returns\"}},\"Function\":0},\"Name\":\"Sum(gold_product_month_kpi.Total_Returns)\",\"NativeReferenceName\":\"Sum of Total_Returns\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Total_Returns\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"30D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.82,
+          "width": 251.59,
+          "x": 261.49,
+          "y": 93.29,
+          "z": 1001.00
         }
       ],
       "width": 1280.00
