@@ -1,0 +1,127 @@
+table gold_product_month_kpi
+	lineageTag: 988e9481-0eec-400c-b295-ba5a4a008c4e
+	sourceLineageTag: [dbo].[gold_product_month_kpi]
+
+	column ProductName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c9626431-351c-4456-8d4a-242de1bf9d6e
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Orders
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: ce632d7b-ae7a-46ff-87ef-a594a079499d
+		sourceLineageTag: Total_Orders
+		summarizeBy: sum
+		sourceColumn: Total_Orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unique_Customers
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 7ae0f91d-c5bf-4435-9d00-48dc201edf47
+		sourceLineageTag: Unique_Customers
+		summarizeBy: sum
+		sourceColumn: Unique_Customers
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Returns
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: cc71985c-be2e-41a8-9c19-736d7e0fff0a
+		sourceLineageTag: Total_Returns
+		summarizeBy: sum
+		sourceColumn: Total_Returns
+
+		annotation SummarizationSetBy = Automatic
+
+	column Return_Rate_%
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2eceff81-1bd3-46c1-8f9b-e36119601392
+		sourceLineageTag: Return_Rate_%
+		summarizeBy: sum
+		sourceColumn: Return_Rate_%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_Revenue
+		dataType: double
+		sourceProviderType: float
+		lineageTag: cdcc31b2-d761-4c3f-85ba-756d72291c90
+		sourceLineageTag: Total_Revenue
+		summarizeBy: sum
+		sourceColumn: Total_Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Avg_Order_Value
+		dataType: double
+		sourceProviderType: float
+		lineageTag: f748eb45-8acd-4e72-925e-8d8d840ba670
+		sourceLineageTag: Avg_Order_Value
+		summarizeBy: sum
+		sourceColumn: Avg_Order_Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_Stock
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 341d6cf5-c4bb-4951-890d-d3eda8b02cdf
+		sourceLineageTag: Total_Stock
+		summarizeBy: sum
+		sourceColumn: Total_Stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Cost
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 78011eb7-a9d9-435a-ae08-4f67cc1ea4eb
+		sourceLineageTag: Avg_Cost
+		summarizeBy: sum
+		sourceColumn: Avg_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Net_Profit
+		dataType: double
+		sourceProviderType: float
+		lineageTag: a9218126-01a5-4994-86bc-e174e240166d
+		sourceLineageTag: Net_Profit
+		summarizeBy: sum
+		sourceColumn: Net_Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_product_month_kpi = entity
+		mode: directLake
+		source
+			entityName: gold_product_month_kpi
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
