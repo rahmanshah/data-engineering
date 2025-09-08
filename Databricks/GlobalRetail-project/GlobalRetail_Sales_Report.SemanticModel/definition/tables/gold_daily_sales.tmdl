@@ -1,0 +1,42 @@
+table gold_daily_sales
+	lineageTag: 0168346d-ff24-4a5e-9207-00470edc7119
+
+	column transaction_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a71852dd-bea5-4376-92ab-422a29a1a03b
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+		variation Variation
+			isDefault
+			relationship: fa44e374-e784-473b-b00c-518b4bdda4bb
+			defaultHierarchy: LocalDateTable_2189cbdb-97f2-4cb3-bcd1-54b7d760cb93.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column daily_total_sales
+		dataType: double
+		lineageTag: 71cae0ed-e0b4-4971-83f3-3cca5a3a772d
+		summarizeBy: sum
+		sourceColumn: daily_total_sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_daily_sales = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-ffb2734f-3900.cloud.databricks.com", "/sql/1.0/warehouses/f9889b398405ad31", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    workspace_Database = Source{[Name="workspace",Kind="Database"]}[Data],
+				    globalretail_gold_Schema = workspace_Database{[Name="globalretail_gold",Kind="Schema"]}[Data],
+				    gold_daily_sales_Table = globalretail_gold_Schema{[Name="gold_daily_sales",Kind="Table"]}[Data]
+				in
+				    gold_daily_sales_Table
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,51 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.60\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "388910ec16d8956bfec6",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"2b2126bbdab090c7c089\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.605521030503024,\"y\":0,\"z\":0,\"width\":1270.6732106065429,\"height\":378.73197205983354,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(gold_daily_sales.daily_total_sales)\"}],\"Category\":[{\"queryRef\":\"gold_daily_sales.transaction_date.Variation.Date Hierarchy.Year\",\"active\":true},{\"queryRef\":\"gold_daily_sales.transaction_date.Variation.Date Hierarchy.Month\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_daily_sales\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"daily_total_sales\"}},\"Function\":0},\"Name\":\"Sum(gold_daily_sales.daily_total_sales)\",\"NativeReferenceName\":\"Sum of daily_total_sales\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Name\":\"Variation\",\"Property\":\"transaction_date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Month\"},\"Name\":\"gold_daily_sales.transaction_date.Variation.Date Hierarchy.Month\",\"NativeReferenceName\":\"transaction_date Month\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Name\":\"Variation\",\"Property\":\"transaction_date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"gold_daily_sales.transaction_date.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"transaction_date Year\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 378.73,
+          "width": 1270.67,
+          "x": 9.61,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"733d4c82f61296ac27b1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10,\"y\":389,\"width\":1270,\"height\":331,\"z\":1,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(gold_daily_sales_by_category.Category_total_sales)\"}],\"Category\":[{\"queryRef\":\"gold_daily_sales_by_category.Product_category\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_daily_sales_by_category\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Category_total_sales\"}},\"Function\":0},\"Name\":\"Sum(gold_daily_sales_by_category.Category_total_sales)\",\"NativeReferenceName\":\"Sum of Category_total_sales\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Product_category\"},\"Name\":\"gold_daily_sales_by_category.Product_category\",\"NativeReferenceName\":\"Product_category\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Category_total_sales\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 331.00,
+          "width": 1270.00,
+          "x": 10.00,
+          "y": 389.00,
+          "z": 1.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-FI
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["gold_daily_sales","gold_daily_sales_by_category"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.138.1203.0 (24.11)
+
+ref table gold_daily_sales
+ref table DateTableTemplate_b9a65588-f1c9-43ab-8cef-6cc5726bab7f
+ref table LocalDateTable_2189cbdb-97f2-4cb3-bcd1-54b7d760cb93
+ref table gold_daily_sales_by_category
+
+ref cultureInfo en-US
+

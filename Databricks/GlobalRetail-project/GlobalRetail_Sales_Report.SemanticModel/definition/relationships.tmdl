@@ -1,0 +1,5 @@
+relationship fa44e374-e784-473b-b00c-518b4bdda4bb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_daily_sales.transaction_date
+	toColumn: LocalDateTable_2189cbdb-97f2-4cb3-bcd1-54b7d760cb93.Date
+
