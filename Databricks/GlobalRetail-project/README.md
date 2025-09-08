@@ -3,4 +3,4 @@ Data was processed using the Medallion Architecture, which includes the followin
 - **Silver layer**: Data cleaning, validation, and enrichment to create refined datasets.
 - **Gold layer**: Dimensional modeling and aggregation to produce highly refined views for analytics and reporting.
 
-The processed data was then used to generate a report using Power BI Desktop, which was later imported using Microsoft Fabric.
+The processed data was then used to generate a report using Power BI Desktop, which was later imported using Microsoft Fabric.Also, added dashboard from databricks as well.
