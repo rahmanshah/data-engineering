@@ -1,0 +1,151 @@
+{
+  "datasets": [
+    {
+      "name": "da81604c",
+      "displayName": "gold_daily_sales",
+      "queryLines": [
+        "SELECT * FROM workspace.globalretail_gold.gold_daily_sales"
+      ]
+    },
+    {
+      "name": "723a2067",
+      "displayName": "gold_daily_sales_by_category",
+      "queryLines": [
+        "SELECT * FROM workspace.globalretail_gold.gold_daily_sales_by_category"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "8caa69e0",
+      "displayName": "Report",
+      "layout": [
+        {
+          "widget": {
+            "name": "9ca0409d",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "da81604c",
+                  "fields": [
+                    {
+                      "name": "sum(daily_total_sales)",
+                      "expression": "SUM(`daily_total_sales`)"
+                    },
+                    {
+                      "name": "yearly(transaction_date)",
+                      "expression": "DATE_TRUNC(\"YEAR\", `transaction_date`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(daily_total_sales)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Sum of daily_total_sales"
+                },
+                "y": {
+                  "fieldName": "yearly(transaction_date)",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "transaction_date"
+                }
+              },
+              "frame": {
+                "showTitle": false
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "234687b3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "723a2067",
+                  "fields": [
+                    {
+                      "name": "sum(Category_total_sales)",
+                      "expression": "SUM(`Category_total_sales`)"
+                    },
+                    {
+                      "name": "Product_category",
+                      "expression": "`Product_category`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(Category_total_sales)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Total Sales"
+                },
+                "y": {
+                  "fieldName": "Product_category",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "Category"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#FAFAFB",
+        "dark": "#2B3A46"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#434D55"
+      },
+      "fontColor": {
+        "light": "#11171C",
+        "dark": "#E8ECF0"
+      },
+      "selectionColor": {
+        "light": "#2272B4",
+        "dark": "#161C22"
+      },
+      "widgetHeaderAlignment": "LEFT"
+    }
+  }
+}
