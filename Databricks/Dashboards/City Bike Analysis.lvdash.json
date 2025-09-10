@@ -1,0 +1,336 @@
+{
+  "datasets": [
+    {
+      "name": "e5a3d798",
+      "displayName": "bike_data",
+      "queryLines": [
+        "SELECT * FROM course_project.citibike.vw_jc_bike_data_22;"
+      ],
+      "catalog": "course_project",
+      "schema": "citibike"
+    },
+    {
+      "name": "6311c773",
+      "displayName": "most_common_stations",
+      "queryLines": [
+        "-- most_common_stations dataset\r\n",
+        "select \r\n",
+        "concat(start_station_name, '-->', end_station_name) as `Start and End Journey`,\r\n",
+        "count(*) as `Number of Trips`\r\n",
+        "from course_project.citibike.vw_jc_bike_data_22\r\n",
+        "group by 1\r\n",
+        "order by 2 desc;\r\n"
+      ],
+      "catalog": "course_project",
+      "schema": "citibike"
+    }
+  ],
+  "pages": [
+    {
+      "name": "3668fffe",
+      "displayName": "Report",
+      "layout": [
+        {
+          "widget": {
+            "name": "bea98e8e",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "fields": [
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "count(*)",
+                  "displayName": "Count of Records"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total Rides"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "833d0815",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "fields": [
+                    {
+                      "name": "sum(trip_duration_mins)",
+                      "expression": "SUM(`trip_duration_mins`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(trip_duration_mins)",
+                  "displayName": "Sum of trip_duration_mins"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Trip duration (mins)"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "a857a873",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "fields": [
+                    {
+                      "name": "avg(trip_duration_mins)",
+                      "expression": "AVG(`trip_duration_mins`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(trip_duration_mins)",
+                  "displayName": "Average trip_duration_mins"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Average Trip Durations (mins)"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "6eec45b9",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "fields": [
+                    {
+                      "name": "monthly(started_at)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `started_at`)"
+                    },
+                    {
+                      "name": "avg(trip_duration_mins)",
+                      "expression": "AVG(`trip_duration_mins`)"
+                    },
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "combo",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(started_at)",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "Date"
+                },
+                "y": {
+                  "primary": {
+                    "fields": [
+                      {
+                        "fieldName": "avg(trip_duration_mins)",
+                        "displayName": "Avg Trip Durations (mins)"
+                      }
+                    ],
+                    "scale": {
+                      "type": "quantitative"
+                    }
+                  },
+                  "secondary": {
+                    "fields": [
+                      {
+                        "fieldName": "count(*)",
+                        "displayName": "Total Rides"
+                      }
+                    ],
+                    "scale": {
+                      "type": "quantitative"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "a8493267",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6311c773",
+                  "fields": [
+                    {
+                      "name": "Start and End Journey",
+                      "expression": "`Start and End Journey`"
+                    },
+                    {
+                      "name": "Number of Trips",
+                      "expression": "`Number of Trips`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "Start and End Journey",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100000,
+                    "title": "Start and End Journey",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "Start and End Journey"
+                  },
+                  {
+                    "fieldName": "Number of Trips",
+                    "numberFormat": "0",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "integer",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "Number of Trips",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "Number of Trips"
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "showTitle": true,
+                "title": "Most Common Stations"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    }
+  }
+}
