@@ -4,7 +4,40 @@
       "name": "e5a3d798",
       "displayName": "bike_data",
       "queryLines": [
-        "SELECT * FROM course_project.citibike.vw_jc_bike_data_22;"
+        "SELECT * FROM course_project.citibike.vw_jc_bike_data_22\r\n",
+        "where started_at between :parameter and :parameter1 ;"
+      ],
+      "parameters": [
+        {
+          "displayName": "started_at",
+          "keyword": "parameter",
+          "dataType": "DATE",
+          "defaultSelection": {
+            "values": {
+              "dataType": "DATE",
+              "values": [
+                {
+                  "value": "2022-01-01T00:00:00.000"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "ended_at",
+          "keyword": "parameter1",
+          "dataType": "DATE",
+          "defaultSelection": {
+            "values": {
+              "dataType": "DATE",
+              "values": [
+                {
+                  "value": "2022-12-31T00:00:00.000"
+                }
+              ]
+            }
+          }
+        }
       ],
       "catalog": "course_project",
       "schema": "citibike"
@@ -18,8 +51,41 @@
         "concat(start_station_name, '-->', end_station_name) as `Start and End Journey`,\r\n",
         "count(*) as `Number of Trips`\r\n",
         "from course_project.citibike.vw_jc_bike_data_22\r\n",
+        "where started_at between :parameter and :parameter1\r\n",
         "group by 1\r\n",
         "order by 2 desc;\r\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "started_at",
+          "keyword": "parameter",
+          "dataType": "DATE",
+          "defaultSelection": {
+            "values": {
+              "dataType": "DATE",
+              "values": [
+                {
+                  "value": "2022-01-01T00:00:00.000"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "ended_at",
+          "keyword": "parameter1",
+          "dataType": "DATE",
+          "defaultSelection": {
+            "values": {
+              "dataType": "DATE",
+              "values": [
+                {
+                  "value": "2022-12-31T00:00:00.000"
+                }
+              ]
+            }
+          }
+        }
       ],
       "catalog": "course_project",
       "schema": "citibike"
@@ -65,7 +131,7 @@
           },
           "position": {
             "x": 0,
-            "y": 0,
+            "y": 1,
             "width": 2,
             "height": 2
           }
@@ -105,7 +171,7 @@
           },
           "position": {
             "x": 2,
-            "y": 0,
+            "y": 1,
             "width": 2,
             "height": 2
           }
@@ -145,7 +211,7 @@
           },
           "position": {
             "x": 4,
-            "y": 0,
+            "y": 1,
             "width": 2,
             "height": 2
           }
@@ -216,7 +282,7 @@
           },
           "position": {
             "x": 0,
-            "y": 2,
+            "y": 3,
             "width": 3,
             "height": 6
           }
@@ -319,9 +385,127 @@
           },
           "position": {
             "x": 3,
-            "y": 2,
+            "y": 3,
             "width": 3,
             "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "a902ea6f",
+            "queries": [
+              {
+                "name": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c55cf166193a5a9682239e6dd_parameter",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "parameters": [
+                    {
+                      "name": "parameter",
+                      "keyword": "parameter"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c91f21eae9eb15a926da20d03_parameter",
+                "query": {
+                  "datasetName": "6311c773",
+                  "parameters": [
+                    {
+                      "name": "parameter",
+                      "keyword": "parameter"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "parameterName": "parameter",
+                    "queryName": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c55cf166193a5a9682239e6dd_parameter"
+                  },
+                  {
+                    "parameterName": "parameter",
+                    "queryName": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c91f21eae9eb15a926da20d03_parameter"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Start Date"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "5ca8a1db",
+            "queries": [
+              {
+                "name": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c55cf166193a5a9682239e6dd_parameter1",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "parameters": [
+                    {
+                      "name": "parameter1",
+                      "keyword": "parameter1"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c91f21eae9eb15a926da20d03_parameter1",
+                "query": {
+                  "datasetName": "6311c773",
+                  "parameters": [
+                    {
+                      "name": "parameter1",
+                      "keyword": "parameter1"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "parameterName": "parameter1",
+                    "queryName": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c55cf166193a5a9682239e6dd_parameter1"
+                  },
+                  {
+                    "parameterName": "parameter1",
+                    "queryName": "parameter_dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c91f21eae9eb15a926da20d03_parameter1"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "End Date"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 1
           }
         }
       ],
