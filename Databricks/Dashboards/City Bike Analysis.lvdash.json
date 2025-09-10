@@ -49,16 +49,17 @@
         "-- most_common_stations dataset\r\n",
         "select \r\n",
         "concat(start_station_name, '-->', end_station_name) as `Start and End Journey`,\r\n",
+        "member_casual as `Rider Type`,\r\n",
         "count(*) as `Number of Trips`\r\n",
         "from course_project.citibike.vw_jc_bike_data_22\r\n",
-        "where started_at between :parameter and :parameter1\r\n",
-        "group by 1\r\n",
-        "order by 2 desc;\r\n"
+        "where started_at between :start_date and :end_date\r\n",
+        "group by 1,2\r\n",
+        "order by 3 desc;\r\n"
       ],
       "parameters": [
         {
-          "displayName": "started_at",
-          "keyword": "parameter",
+          "displayName": "start_date",
+          "keyword": "start_date",
           "dataType": "DATE",
           "defaultSelection": {
             "values": {
@@ -72,8 +73,8 @@
           }
         },
         {
-          "displayName": "ended_at",
-          "keyword": "parameter1",
+          "displayName": "end_date",
+          "keyword": "end_date",
           "dataType": "DATE",
           "defaultSelection": {
             "values": {
@@ -131,7 +132,7 @@
           },
           "position": {
             "x": 0,
-            "y": 1,
+            "y": 2,
             "width": 2,
             "height": 2
           }
@@ -171,7 +172,7 @@
           },
           "position": {
             "x": 2,
-            "y": 1,
+            "y": 2,
             "width": 2,
             "height": 2
           }
@@ -211,7 +212,7 @@
           },
           "position": {
             "x": 4,
-            "y": 1,
+            "y": 2,
             "width": 2,
             "height": 2
           }
@@ -282,7 +283,7 @@
           },
           "position": {
             "x": 0,
-            "y": 3,
+            "y": 4,
             "width": 3,
             "height": 6
           }
@@ -299,6 +300,10 @@
                     {
                       "name": "Start and End Journey",
                       "expression": "`Start and End Journey`"
+                    },
+                    {
+                      "name": "Rider Type",
+                      "expression": "`Rider Type`"
                     },
                     {
                       "name": "Number of Trips",
@@ -342,6 +347,33 @@
                     "displayName": "Start and End Journey"
                   },
                   {
+                    "fieldName": "Rider Type",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "Rider Type",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "Rider Type"
+                  },
+                  {
                     "fieldName": "Number of Trips",
                     "numberFormat": "0",
                     "booleanValues": [
@@ -359,7 +391,7 @@
                     "type": "integer",
                     "displayAs": "number",
                     "visible": true,
-                    "order": 100001,
+                    "order": 100002,
                     "title": "Number of Trips",
                     "allowSearch": false,
                     "alignContent": "right",
@@ -385,7 +417,7 @@
           },
           "position": {
             "x": 3,
-            "y": 3,
+            "y": 4,
             "width": 3,
             "height": 6
           }
@@ -444,7 +476,7 @@
           },
           "position": {
             "x": 0,
-            "y": 0,
+            "y": 1,
             "width": 3,
             "height": 1
           }
@@ -503,8 +535,77 @@
           },
           "position": {
             "x": 3,
-            "y": 0,
+            "y": 1,
             "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "fa8a98ad",
+            "queries": [
+              {
+                "name": "dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c55cf166193a5a9682239e6dd_rideable_type",
+                "query": {
+                  "datasetName": "e5a3d798",
+                  "fields": [
+                    {
+                      "name": "rideable_type",
+                      "expression": "`rideable_type`"
+                    },
+                    {
+                      "name": "rideable_type_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c91f21eae9eb15a926da20d03_Rider Type",
+                "query": {
+                  "datasetName": "6311c773",
+                  "fields": [
+                    {
+                      "name": "Rider Type",
+                      "expression": "`Rider Type`"
+                    },
+                    {
+                      "name": "Rider Type_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "rideable_type",
+                    "displayName": "rideable_type",
+                    "queryName": "dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c55cf166193a5a9682239e6dd_rideable_type"
+                  },
+                  {
+                    "fieldName": "Rider Type",
+                    "displayName": "Rider Type",
+                    "queryName": "dashboards/01f08e4c4af710c78a0c79cec005c8ad/datasets/01f08e4c91f21eae9eb15a926da20d03_Rider Type"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Rider type"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
             "height": 1
           }
         }
