@@ -10,3 +10,7 @@
 2. In the Command Prompt, run: `databricks configure`
 3. Enter the Databricks workspace URL and your personal access token when prompted.
 4. To verify the connection, run: `databricks users list` — this should display all users in the connected Databricks workspace.
+
+#### Commands
+1. Check available profiles by running: `databricks auth profiles`
+2. Get details of a profile by running: `databricks auth describe`
