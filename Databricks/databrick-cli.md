@@ -11,6 +11,9 @@
 3. Enter the Databricks workspace URL and your personal access token when prompted.
 4. To verify the connection, run: `databricks users list` — this should display all users in the connected Databricks workspace.
 
-#### Commands
-1. Check available profiles by running: `databricks auth profiles`
-2. Get details of a profile by running: `databricks auth describe`
+#### Common CLI Commands
+1. List available authentication profiles: `databricks auth profiles`
+2. Show details for a specific profile: `databricks auth describe [profile name]`
+3. List all catalogs: `databricks catalogs list`
+4. List schemas in a catalog: `databricks schemas list [catalog name]`
+5. List tables in a schema: `databricks tables list [catalog name] [schema name]`
