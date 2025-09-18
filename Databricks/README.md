@@ -1,1 +1,1 @@
-## This directory consist of databricks projects,queries done using databricks free edition
+## This directory contains Databricks projects, queries, and CLI commands completed using the Databricks free edition.
