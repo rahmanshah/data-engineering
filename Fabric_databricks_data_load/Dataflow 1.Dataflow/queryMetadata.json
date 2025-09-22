@@ -1,0 +1,32 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Dataflow 1",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DefaultDestination": {
+      "queryId": "87e2cbbc-0c9d-40da-8138-ef08891d5e63",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "jc_bike_data_22": {
+      "queryId": "4688bc50-58a7-48ac-bfd5-06487b762a04",
+      "queryName": "jc_bike_data_22",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"ce7c7c69-8ed8-49e2-bf58-560df7940e0b\",\"DatasourceId\":\"a0a422a8-c88b-4be4-ad10-a32479cf4399\"}"
+    },
+    {
+      "path": "{\"host\":\"dbc-ffb2734f-3900.cloud.databricks.com\",\"httpPath\":\"\\/sql\\/1.0\\/warehouses\\/f9889b398405ad31\"}",
+      "kind": "DatabricksMultiCloud",
+      "connectionId": "{\"ClusterId\":\"ce7c7c69-8ed8-49e2-bf58-560df7940e0b\",\"DatasourceId\":\"04c9a0bb-a2ad-49b4-ad3c-a32544d9696e\"}"
+    }
+  ]
+}
