@@ -1,1 +1,1 @@
-This is an auto-created file for Fabric_databricks_data_load
+In this project, we load data from databricks worksapce to Fabric lakehouse using dataflow
