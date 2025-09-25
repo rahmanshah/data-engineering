@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[jc_bike_data_22] (
+CREATE TABLE [dbo].[db_jc_bike_data_22] (
 
 	[ride_id] varchar(8000) NULL, 
 	[member_casual] varchar(8000) NULL, 

@@ -13,8 +13,8 @@
     "sourceQueryCulture": "en-US",
     "tables": [
       {
-        "name": "aggregated_bike_data",
-        "sourceLineageTag": "[dbo].[aggregated_bike_data]",
+        "name": "db_aggregated_bike_data",
+        "sourceLineageTag": "[dbo].[db_aggregated_bike_data]",
         "columns": [
           {
             "name": "ride_id",
@@ -110,7 +110,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "aggregated_bike_data",
+              "entityName": "db_aggregated_bike_data",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
@@ -124,8 +124,8 @@
         ]
       },
       {
-        "name": "jc_bike_data_22",
-        "sourceLineageTag": "[dbo].[jc_bike_data_22]",
+        "name": "db_jc_bike_data_22",
+        "sourceLineageTag": "[dbo].[db_jc_bike_data_22]",
         "columns": [
           {
             "name": "ride_id",
@@ -306,7 +306,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "jc_bike_data_22",
+              "entityName": "db_jc_bike_data_22",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
@@ -320,8 +320,8 @@
         ]
       },
       {
-        "name": "products",
-        "sourceLineageTag": "[dbo].[products]",
+        "name": "db_products",
+        "sourceLineageTag": "[dbo].[db_products]",
         "columns": [
           {
             "name": "ProductID",
@@ -391,7 +391,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "products",
+              "entityName": "db_products",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
@@ -405,8 +405,8 @@
         ]
       },
       {
-        "name": "station_data",
-        "sourceLineageTag": "[dbo].[station_data]",
+        "name": "db_station_data",
+        "sourceLineageTag": "[dbo].[db_station_data]",
         "columns": [
           {
             "name": "station_id",
@@ -443,7 +443,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "station_data",
+              "entityName": "db_station_data",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }
@@ -457,8 +457,8 @@
         ]
       },
       {
-        "name": "trip_duration",
-        "sourceLineageTag": "[dbo].[trip_duration]",
+        "name": "db_trip_duration",
+        "sourceLineageTag": "[dbo].[db_trip_duration]",
         "columns": [
           {
             "name": "ride_id",
@@ -496,7 +496,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "trip_duration",
+              "entityName": "db_trip_duration",
               "expressionSource": "DatabaseQuery",
               "schemaName": "dbo"
             }

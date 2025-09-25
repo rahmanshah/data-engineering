@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[products] (
+CREATE TABLE [dbo].[db_products] (
 
 	[ProductID] bigint NULL, 
 	[ProductName] varchar(8000) NULL, 
