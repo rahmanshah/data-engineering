@@ -21,3 +21,5 @@ This folder contains files and configurations related to dbt (data build tool) c
 ## Usage
 
 This folder is used to commit changes from dbt Cloud to maintain version control of our data transformation code.
+## Repo
+Repo is created on https://github.com/rahmanshah/dbt_databricks 
